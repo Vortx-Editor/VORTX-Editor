@@ -70,12 +70,12 @@
     color: #ffffff !important;
   }
   #bundles [data-i18n="tiers-available"] {
-    color: rgba(255, 255, 255, 0.9) !important;
+    color: rgba(255, 255, 255, 0.95) !important;
     text-shadow: 0 2px 8px rgba(0,0,0,0.8) !important;
   }
   #bundles .vortx-explore-btn {
-    background: rgba(10, 10, 15, 0.8) !important;
-    border: 1.5px solid rgba(255, 255, 255, 0.4) !important;
+    background: rgba(10, 10, 15, 0.85) !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.45) !important;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), inset 0 1px 2px rgba(255, 255, 255, 0.4) !important;
     backdrop-filter: blur(12px) !important;
   }
@@ -982,11 +982,8 @@
     const SUPABASE_KEY = 'Sb_publishable_SuB1uBSawTCoh8G9Z4M-Lw_lrwJ6RIE';
     let supabase = null;
 
-    function getSupabase() {
-      if (!supabase && window.supabase) {
-        supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-      }
-      return supabase;
+    if (window.supabase) {
+      supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
     }
 
     let hasRatedThisSession = false;
@@ -1065,12 +1062,12 @@
       setTimeout(function () { if (toast && toast.parentNode) toast.parentNode.removeChild(toast); }, 3000);
     };
 
-    /* حساب وعرض أرقام التقييم والنسب بدقة متناهية */
-    function applyRatingStats(reviewsList) {
+    /* حساب وتحديث الواجهة بالأرقام الحقيقية من Supabase */
+    function updateRatingUI(allReviews) {
       const ratingEl = document.getElementById('live-rating-avg');
       const countEl = document.getElementById('live-reviews-count');
 
-      if (!reviewsList || reviewsList.length === 0) {
+      if (!allReviews || allReviews.length === 0) {
         if (ratingEl) { ratingEl.textContent = "0"; }
         if (countEl) { countEl.textContent = "0"; }
         [5, 4, 3, 2, 1].forEach(star => {
@@ -1082,17 +1079,18 @@
         return;
       }
 
-      const total = reviewsList.length;
-      const sum = reviewsList.reduce((acc, r) => acc + Number(r.rating || 5), 0);
-      const avg = (sum / total).toFixed(1);
+      const total = allReviews.length;
+      const totalScore = allReviews.reduce((sum, r) => sum + Number(r.rating || 5), 0);
+      const rawAvg = totalScore / total;
+      const displayScore = (rawAvg % 1 === 0) ? rawAvg.toFixed(0) : rawAvg.toFixed(1);
 
-      if (ratingEl) { ratingEl.setAttribute('data-target', avg); ratingEl.textContent = avg; }
+      if (ratingEl) { ratingEl.setAttribute('data-target', displayScore); ratingEl.textContent = displayScore; }
       if (countEl) { countEl.setAttribute('data-target', total); countEl.textContent = total.toLocaleString('en-US'); }
 
       const counts = { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0 };
-      reviewsList.forEach(r => {
-        const s = Math.min(5, Math.max(1, Math.round(Number(r.rating || 5))));
-        counts[s] = (counts[s] || 0) + 1;
+      allReviews.forEach(r => {
+        const score = Math.min(5, Math.max(1, Math.round(Number(r.rating || 5))));
+        counts[score] = (counts[score] || 0) + 1;
       });
 
       [5, 4, 3, 2, 1].forEach(star => {
@@ -1107,7 +1105,7 @@
     /* إرسال التقييم: إرسال فوري إلى Supabase مع قفل الزر حتى تحديث الصفحة */
     window.submitUserRating = async function() {
       if (hasRatedThisSession) {
-        const msg = (window.currentLang === 'ar') ? 'تم تسجيل تقييمك بالفعل! حدّث الصفحة للتقييم مجدداً' : 'You already rated! Refresh the page to rate again.';
+        const msg = (window.currentLang === 'ar') ? 'تم تسجيل تقييمك بالفعل في هذه الجلسة!' : 'You already rated in this session!';
         window.showToast(msg);
         return;
       }
@@ -1122,7 +1120,7 @@
       const selectedScore = parseInt(ratingRadio.value, 10);
       hasRatedThisSession = true;
 
-      // قفل زر التقييم
+      // قفل الزر فوراً
       const submitBtn = document.getElementById('btn-submit-rating-el');
       const submitText = document.getElementById('btn-submit-text');
       if (submitBtn) {
@@ -1133,20 +1131,16 @@
       }
 
       ratingRadio.checked = false;
-      window.showToast((window.currentLang === 'ar') ? 'جاري تسجيل تقييمك...' : 'Submitting your rating...');
+      window.showToast((window.currentLang === 'ar') ? 'جاري حفظ تقييمك...' : 'Submitting rating...');
 
-      const sb = getSupabase();
-      if (sb) {
+      if (supabase) {
         try {
-          // حفظ دائم في سوبابيز مع إرسال comment فارغ لضمان عدم حدوث خطأ Not-Null
-          const { error } = await sb.from('reviews').insert([
+          // حفظ دائم في Supabase بدون أي قيود ليظهر للجميع
+          await supabase.from('reviews').insert([
             { rating: selectedScore, comment: '' }
           ]);
-          if (error) {
-            console.error('Supabase error inserting review:', error);
-          }
         } catch(err) {
-          console.error('Insert error:', err);
+          console.error('Supabase error:', err);
         }
       }
 
@@ -1156,33 +1150,31 @@
       await fetchLiveStats();
     };
 
-    /* جلب البيانات العالمية الصافية من Supabase لتتطابق في جميع الأجهزة */
+    /* جلب البيانات الصافية من Supabase لتتطابق في جميع الأجهزة */
     async function fetchLiveStats() {
-      const sb = getSupabase();
       let allReviews = [];
-      let totalVisits = parseInt(localStorage.getItem('vortx_local_visits') || '0', 10) + 1;
-      localStorage.setItem('vortx_local_visits', totalVisits);
+      let totalVisits = 1;
 
-      if (sb) {
+      if (supabase) {
         try {
-          await sb.from('page_views').insert([{}]);
+          await supabase.from('page_views').insert([{}]);
         } catch(e) {}
 
         try {
-          const { count, error: viewErr } = await sb.from('page_views').select('*', { count: 'exact', head: true });
-          if (count !== null && !viewErr) {
+          const { count } = await supabase.from('page_views').select('*', { count: 'exact', head: true });
+          if (count !== null && count !== undefined) {
             totalVisits = count;
           }
         } catch(e) {}
 
         try {
           // جلب كل التقييمات المخزنة في Supabase لجميع الزوار على مر السنين
-          const { data, error: revErr } = await sb
+          const { data, error } = await supabase
             .from('reviews')
             .select('rating, created_at')
             .order('created_at', { ascending: false });
 
-          if (data && !revErr) {
+          if (data && !error) {
             allReviews = data;
           }
         } catch(e) {
@@ -1196,7 +1188,7 @@
         viewsEl.textContent = totalVisits.toLocaleString('en-US'); 
       }
 
-      applyRatingStats(allReviews);
+      updateRatingUI(allReviews);
     }
 
     (function(){
