@@ -978,14 +978,19 @@
   (function () {
     "use strict";
 
+    // رابط ومفتاح Supabase الرسمي من كودك الأول
     const SUPABASE_URL = 'https://bcystqufgckekgaqeujx.supabase.co';
     const SUPABASE_KEY = 'Sb_publishable_SuB1uBSawTCoh8G9Z4M-Lw_lrwJ6RIE';
     let supabase = null;
 
-    if (window.supabase) {
-      supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    function getSupabase() {
+      if (!supabase && window.supabase) {
+        supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+      }
+      return supabase;
     }
 
+    let globalReviewsList = [];
     let hasRatedThisSession = false;
     let favItems = JSON.parse(localStorage.getItem('vortx_favorites') || '[]');
 
@@ -1062,12 +1067,12 @@
       setTimeout(function () { if (toast && toast.parentNode) toast.parentNode.removeChild(toast); }, 3000);
     };
 
-    /* حساب وتحديث الواجهة بالأرقام الحقيقية من Supabase */
-    function updateRatingUI(allReviews) {
+    /* الحسبة الرياضية الدقيقة للتقييم والنسب */
+    function renderRatingStats(reviewsList) {
       const ratingEl = document.getElementById('live-rating-avg');
       const countEl = document.getElementById('live-reviews-count');
 
-      if (!allReviews || allReviews.length === 0) {
+      if (!reviewsList || reviewsList.length === 0) {
         if (ratingEl) { ratingEl.textContent = "0"; }
         if (countEl) { countEl.textContent = "0"; }
         [5, 4, 3, 2, 1].forEach(star => {
@@ -1079,8 +1084,8 @@
         return;
       }
 
-      const total = allReviews.length;
-      const totalScore = allReviews.reduce((sum, r) => sum + Number(r.rating || 5), 0);
+      const total = reviewsList.length;
+      const totalScore = reviewsList.reduce((acc, r) => acc + Number(r.rating || 5), 0);
       const rawAvg = totalScore / total;
       const displayScore = (rawAvg % 1 === 0) ? rawAvg.toFixed(0) : rawAvg.toFixed(1);
 
@@ -1088,9 +1093,9 @@
       if (countEl) { countEl.setAttribute('data-target', total); countEl.textContent = total.toLocaleString('en-US'); }
 
       const counts = { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0 };
-      allReviews.forEach(r => {
-        const score = Math.min(5, Math.max(1, Math.round(Number(r.rating || 5))));
-        counts[score] = (counts[score] || 0) + 1;
+      reviewsList.forEach(r => {
+        const s = Math.min(5, Math.max(1, Math.round(Number(r.rating || 5))));
+        counts[s] = (counts[s] || 0) + 1;
       });
 
       [5, 4, 3, 2, 1].forEach(star => {
@@ -1102,10 +1107,10 @@
       });
     }
 
-    /* إرسال التقييم: إرسال فوري إلى Supabase مع قفل الزر حتى تحديث الصفحة */
-    window.submitUserRating = async function() {
+    /* إرسال التقييم الفوري وحفظه بالسيرفر العالمي */
+    window.submitUserRating = function() {
       if (hasRatedThisSession) {
-        const msg = (window.currentLang === 'ar') ? 'تم تسجيل تقييمك بالفعل في هذه الجلسة!' : 'You already rated in this session!';
+        const msg = (window.currentLang === 'ar') ? 'تم تسجيل تقييمك بالفعل! حدّث الصفحة للتقييم مجدداً' : 'You already rated! Refresh the page to rate again.';
         window.showToast(msg);
         return;
       }
@@ -1120,7 +1125,11 @@
       const selectedScore = parseInt(ratingRadio.value, 10);
       hasRatedThisSession = true;
 
-      // قفل الزر فوراً
+      // 1. تحديث بصري فوري بالملي ثانية داخل الصفحة
+      globalReviewsList.unshift({ rating: selectedScore, created_at: new Date().toISOString() });
+      renderRatingStats(globalReviewsList);
+
+      // 2. قفل زر التقييم
       const submitBtn = document.getElementById('btn-submit-rating-el');
       const submitText = document.getElementById('btn-submit-text');
       if (submitBtn) {
@@ -1131,54 +1140,48 @@
       }
 
       ratingRadio.checked = false;
-      window.showToast((window.currentLang === 'ar') ? 'جاري حفظ تقييمك...' : 'Submitting rating...');
-
-      if (supabase) {
-        try {
-          // حفظ دائم في Supabase بدون أي قيود ليظهر للجميع
-          await supabase.from('reviews').insert([
-            { rating: selectedScore, comment: '' }
-          ]);
-        } catch(err) {
-          console.error('Supabase error:', err);
-        }
-      }
-
       window.showToast((window.currentLang === 'ar') ? 'تم تسجيل تقييمك بنجاح! ★★★★★' : 'RATING SUBMITTED SUCCESSFULLY! ★★★★★');
 
-      // جلب البيانات فوراً من Supabase وتحديث أرقام الصفحة في كل الأجهزة
-      await fetchLiveStats();
+      // 3. الحفظ الدائم في قاعدة بيانات Supabase المشتركة
+      const sb = getSupabase();
+      if (sb) {
+        sb.from('reviews').insert([{ rating: selectedScore, comment: '' }]).then(({ error }) => {
+          if (error) console.error('Supabase save error:', error);
+          fetchLiveStats(); // مزامنة نهائية مع السيرفر
+        });
+      }
     };
 
-    /* جلب البيانات الصافية من Supabase لتتطابق في جميع الأجهزة */
+    /* جلب البيانات الدائمة والمشتركة لكل الزوار والأجهزة من Supabase */
     async function fetchLiveStats() {
-      let allReviews = [];
-      let totalVisits = 1;
+      const sb = getSupabase();
+      let totalVisits = parseInt(localStorage.getItem('vortx_local_visits') || '1', 10);
 
-      if (supabase) {
+      if (sb) {
         try {
-          await supabase.from('page_views').insert([{}]);
+          await sb.from('page_views').insert([{}]);
         } catch(e) {}
 
         try {
-          const { count } = await supabase.from('page_views').select('*', { count: 'exact', head: true });
-          if (count !== null && count !== undefined) {
+          const { count, error } = await sb.from('page_views').select('*', { count: 'exact', head: true });
+          if (count !== null && !error) {
             totalVisits = count;
+            localStorage.setItem('vortx_local_visits', totalVisits);
           }
         } catch(e) {}
 
         try {
-          // جلب كل التقييمات المخزنة في Supabase لجميع الزوار على مر السنين
-          const { data, error } = await supabase
+          // قراءة جميع التقييمات المخزنة في السيرفر لجميع الناس على مر السنين
+          const { data, error } = await sb
             .from('reviews')
             .select('rating, created_at')
             .order('created_at', { ascending: false });
 
-          if (data && !error) {
-            allReviews = data;
+          if (data && !error && data.length > 0) {
+            globalReviewsList = data;
           }
         } catch(e) {
-          console.error('Error fetching global reviews:', e);
+          console.error('Error fetching reviews:', e);
         }
       }
 
@@ -1188,7 +1191,7 @@
         viewsEl.textContent = totalVisits.toLocaleString('en-US'); 
       }
 
-      updateRatingUI(allReviews);
+      renderRatingStats(globalReviewsList);
     }
 
     (function(){
