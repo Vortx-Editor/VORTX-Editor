@@ -192,7 +192,7 @@
   html.light .back-btn-pill { background: #ffffff; border-color: #cbd5e1; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
   .back-btn-pill:hover { transform: scale(1.05); }
 
-  /* تنسيقات باقات الويب */
+  /* باقات الويب */
   .vx-price-card { position: relative; display: flex; flex-direction: column; justify-content: space-between; padding: 1.5rem; width: 100%; border-radius: 1.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.2); z-index: 1; transition: transform .4s ease, box-shadow .4s ease; }
   .vx-price-card:hover { transform: translateY(-5px); }
 
@@ -574,7 +574,7 @@
         </div>
       </div>
 
-      <!-- إحصائيات حقيقية عامة لكل الزوار -->
+      <!-- إحصائيات حقيقية عامة لكل الزوار وبدون أي تأخير أو رقص بالأرقام -->
       <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center mt-8">
         <div class="glass p-6 rounded-2xl">
           <h4 class="font-mono font-black text-3xl sm:text-4xl text-current tracking-wider"><span class="text-current" id="live-reviews-count">0</span></h4>
@@ -1063,7 +1063,7 @@
       setTimeout(function () { if (toast && toast.parentNode) toast.parentNode.removeChild(toast); }, 3000);
     };
 
-    /* الحسبة الموزونة الصافية بدون أخطاء التكرار */
+    /* الحسبة الموزونة الصافية والنسب المئوية الدقيقة */
     function renderRatingStats(allReviews) {
       const ratingEl = document.getElementById('live-rating-avg');
       const countEl = document.getElementById('live-reviews-count');
@@ -1090,7 +1090,7 @@
         totalScore += val;
       });
 
-      // المتوسط الحسابي بالفاصلة الدقيقة
+      // المتوسط الحسابي بالفاصلة الدقيقة (مثل 4.1 أو 5)
       const rawAvg = totalScore / total;
       const displayScore = (rawAvg % 1 === 0) ? rawAvg.toFixed(0) : rawAvg.toFixed(1);
 
@@ -1166,47 +1166,45 @@
 
     /* جلب البيانات الصافية من Supabase لتتطابق في جميع الأجهزة على مر السنين */
     async function fetchLiveStats() {
-      let localReviews = JSON.parse(localStorage.getItem('vortx_reviews_data') || '[]');
+      // 1. عرض فوري ومباشر للأرقام من الذاكرة المحلية أول ما يفتح الموقع عشان ما يقعد ثانية وحدة معلق على صفر
       let localVisits = parseInt(localStorage.getItem('vortx_visit_count') || '1', 10);
+      let localReviews = JSON.parse(localStorage.getItem('vortx_reviews_data') || '[]');
 
-      // أولاً: عرض الكاش فوراً إن وجد عشان ما يبدأ من 0 أبداً
-      if (localReviews.length > 0) {
-        renderRatingStats(localReviews);
-      }
-
-      if (supabase) {
-        try {
-          await supabase.from('page_views').insert([{}]);
-        } catch(e) {}
-
-        try {
-          const { count } = await supabase.from('page_views').select('*', { count: 'exact', head: true });
-          if (count !== null && count !== undefined && count > 0) {
-            localVisits = count;
-            localStorage.setItem('vortx_visit_count', localVisits);
-          }
-        } catch(e) {}
-
-        try {
-          // جلب جميع التقييمات من السيرفر السحابي
-          const { data, error } = await supabase.from('reviews').select('*').order('created_at', { ascending: false });
-          if (data && !error && data.length > 0) {
-            localReviews = data;
-            localStorage.setItem('vortx_reviews_data', JSON.stringify(localReviews));
-          }
-        } catch(e) {
-          console.error('Error fetching global reviews:', e);
-        }
-      }
-
-      // عرض الزيارات بالدقة وبدون أي رقص في الأرقام
       const viewsEl = document.getElementById('live-views-count');
-      if (viewsEl) { 
-        viewsEl.textContent = localVisits.toLocaleString('en-US'); 
-      }
-
-      // تطبيق الأرقام والمعدلات بالكامل
+      if (viewsEl) viewsEl.textContent = localVisits.toLocaleString('en-US');
       renderRatingStats(localReviews);
+
+      if (!supabase) return;
+
+      // 2. مزامنة سريعة وبالتوازي مع Supabase بدون ما يعلّق أي عداد
+      try {
+        const visitPromise = (async () => {
+          try {
+            await supabase.from('page_views').insert([{}]);
+            const { count } = await supabase.from('page_views').select('*', { count: 'exact', head: true });
+            if (count !== null && count > 0) {
+              localVisits = count;
+              localStorage.setItem('vortx_visit_count', localVisits);
+              if (viewsEl) viewsEl.textContent = localVisits.toLocaleString('en-US');
+            }
+          } catch(e) { console.error('Visits sync err:', e); }
+        })();
+
+        const reviewPromise = (async () => {
+          try {
+            const { data, error } = await supabase.from('reviews').select('*').order('created_at', { ascending: false });
+            if (data && !error && data.length > 0) {
+              localReviews = data;
+              localStorage.setItem('vortx_reviews_data', JSON.stringify(localReviews));
+              renderRatingStats(localReviews);
+            }
+          } catch(e) { console.error('Reviews sync err:', e); }
+        })();
+
+        await Promise.allSettled([visitPromise, reviewPromise]);
+      } catch (err) {
+        console.error('Live stats error:', err);
+      }
     }
 
     (function(){
