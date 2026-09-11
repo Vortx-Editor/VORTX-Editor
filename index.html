@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <title>VORTX — Premium Digital Assets</title>
 <meta name="theme-color" content="#09090c" />
+<!-- رابط الفيديو المحسّن سريع التحميل للجوال -->
 <link rel="preload" href="https://res.cloudinary.com/eon6wcph/video/upload/q_auto,w_1080/v1/VORTX_4K_CLEAN_FULL_kd7uui.mp4" as="video" type="video/mp4">
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -62,9 +63,7 @@
   html.light .text-slate-300 { color: #475569 !important; }
   html.light .glass { background: #ffffff !important; border: 1.5px solid #cbd5e1 !important; box-shadow: 0 10px 30px rgba(0,0,0,0.05) !important; }
 
-  /* ========================================================
-     تثبيت وضوح زر وكلمة (Explore Packages) فوق الفيديو في كل الأوضاع
-     ======================================================== */
+  /* تثبيت وضوح زر وكلمة (Explore Packages) فوق الفيديو في كل الأوضاع */
   #bundles .vortx-explore-btn,
   #bundles .vortx-explore-btn span,
   #bundles .vortx-explore-btn * {
@@ -421,6 +420,7 @@
         </div>
       </div>
 
+      <!-- روابط التواصل: التليجرام يفتح قناة فورتكس الرسمية -->
       <div class="absolute bottom-2 sm:-bottom-8 md:-bottom-16 lg:-bottom-20 left-1/2 -translate-x-1/2 w-[90%] max-w-[520px] flex items-center justify-around px-6 sm:px-8 py-4 sm:py-5 rounded-full border border-white/10 glass backdrop-blur-md opacity-80 z-30" dir="rtl">
         <a href="https://www.tiktok.com/@v_ortx?_r=1&_t=ZS-98pGOR9h9Ca" target="_blank" rel="noopener noreferrer" title="TikTok" class="hover:scale-110 hover:opacity-100 transition-all text-current">
           <svg class="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
@@ -534,7 +534,7 @@
       </div>
     </section>
 
-    <!-- نظام التقييم الصافي بالنجوم فقط (تحديث فوري خلال ثانية واحدة) -->
+    <!-- نظام التقييم الصافي بالنجوم (مربوط عالمياً بسوبابيز ليظهر للجميع) -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 py-12 border-t border-white/10 mt-12 reveal-on-scroll">
       
       <div class="max-w-2xl mx-auto mb-10 p-6 sm:p-8 rounded-3xl glass text-center">
@@ -562,7 +562,7 @@
         </div>
       </div>
 
-      <!-- توزيع التقييمات الواقعي والحقيقي -->
+      <!-- توزيع التقييمات الواقعي والدقيق من Supabase -->
       <div class="max-w-2xl mx-auto mb-10 p-6 rounded-3xl glass font-mono">
         <h4 class="text-xs uppercase font-bold text-yellow-500 tracking-widest mb-4 text-center" data-i18n="rating-breakdown">RATING DISTRIBUTION</h4>
         <div class="space-y-3.5 text-xs text-current font-bold">
@@ -574,7 +574,7 @@
         </div>
       </div>
 
-      <!-- الإحصائيات (تصفير الزيارات والعملاء والبدء الصافي من الصفر) -->
+      <!-- إحصائيات حقيقية عامة لكل الزوار -->
       <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center mt-8">
         <div class="glass p-6 rounded-2xl">
           <h4 class="font-mono font-black text-3xl sm:text-4xl text-current tracking-wider"><span class="counter-num text-current" id="live-reviews-count" data-target="0">0</span></h4>
@@ -982,14 +982,12 @@
     const SUPABASE_KEY = 'Sb_publishable_SuB1uBSawTCoh8G9Z4M-Lw_lrwJ6RIE';
     let supabase = null;
 
-    if (window.supabase) {
-      supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    function getSupabase() {
+      if (!supabase && window.supabase) {
+        supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+      }
+      return supabase;
     }
-
-    // تصفير المخزن من جديد بمفتاح ناصع جديد لتجاهل أي تقييمات سابقة
-    const STORAGE_REVIEWS_KEY = 'vortx_clean_reviews_v5';
-    const STORAGE_VISITS_KEY = 'vortx_clean_visits_v5';
-    const FRESH_LAUNCH_EPOCH = '2026-09-11T16:45:00.000Z';
 
     let hasRatedThisSession = false;
     let favItems = JSON.parse(localStorage.getItem('vortx_favorites') || '[]');
@@ -1067,14 +1065,14 @@
       setTimeout(function () { if (toast && toast.parentNode) toast.parentNode.removeChild(toast); }, 3000);
     };
 
-    /* دالة تحديث الواجهة فورياً وبدون أي تأخير */
-    function applyRatingNumbersDirectly(reviewsList) {
+    /* حساب وعرض أرقام التقييم والنسب بدقة متناهية */
+    function applyRatingStats(reviewsList) {
       const ratingEl = document.getElementById('live-rating-avg');
       const countEl = document.getElementById('live-reviews-count');
 
       if (!reviewsList || reviewsList.length === 0) {
-        if (ratingEl) { ratingEl.setAttribute('data-target', "0"); ratingEl.textContent = "0"; }
-        if (countEl) { countEl.setAttribute('data-target', "0"); countEl.textContent = "0"; }
+        if (ratingEl) { ratingEl.textContent = "0"; }
+        if (countEl) { countEl.textContent = "0"; }
         [5, 4, 3, 2, 1].forEach(star => {
           const barEl = document.getElementById(`bar-${star}`); 
           const pctEl = document.getElementById(`pct-${star}`);
@@ -1093,7 +1091,7 @@
 
       const counts = { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0 };
       reviewsList.forEach(r => {
-        const s = Math.min(5, Math.max(1, Number(r.rating || 5)));
+        const s = Math.min(5, Math.max(1, Math.round(Number(r.rating || 5))));
         counts[s] = (counts[s] || 0) + 1;
       });
 
@@ -1106,8 +1104,8 @@
       });
     }
 
-    /* إرسال التقييم: ينعكس على الفور خلال 0.1 ثانية ومسموح مرة واحدة لكل تحديث */
-    window.submitUserRating = function() {
+    /* إرسال التقييم: إرسال فوري إلى Supabase مع قفل الزر حتى تحديث الصفحة */
+    window.submitUserRating = async function() {
       if (hasRatedThisSession) {
         const msg = (window.currentLang === 'ar') ? 'تم تسجيل تقييمك بالفعل! حدّث الصفحة للتقييم مجدداً' : 'You already rated! Refresh the page to rate again.';
         window.showToast(msg);
@@ -1124,19 +1122,7 @@
       const selectedScore = parseInt(ratingRadio.value, 10);
       hasRatedThisSession = true;
 
-      // 1. التحديث الفوري المباشر للمخزن المحلي
-      let localReviews = JSON.parse(localStorage.getItem(STORAGE_REVIEWS_KEY) || '[]');
-      localReviews.unshift({ 
-        id: 'rev_' + Date.now(), 
-        rating: selectedScore, 
-        created_at: new Date().toISOString() 
-      });
-      localStorage.setItem(STORAGE_REVIEWS_KEY, JSON.stringify(localReviews));
-
-      // 2. عكس التقييم فوراً بالواجهة بدون انتظار أي شبكة
-      applyRatingNumbersDirectly(localReviews);
-
-      // 3. قفل الزر وتأكيد النجاح
+      // قفل زر التقييم
       const submitBtn = document.getElementById('btn-submit-rating-el');
       const submitText = document.getElementById('btn-submit-text');
       if (submitBtn) {
@@ -1147,50 +1133,70 @@
       }
 
       ratingRadio.checked = false;
+      window.showToast((window.currentLang === 'ar') ? 'جاري تسجيل تقييمك...' : 'Submitting your rating...');
+
+      const sb = getSupabase();
+      if (sb) {
+        try {
+          // حفظ دائم في سوبابيز مع إرسال comment فارغ لضمان عدم حدوث خطأ Not-Null
+          const { error } = await sb.from('reviews').insert([
+            { rating: selectedScore, comment: '' }
+          ]);
+          if (error) {
+            console.error('Supabase error inserting review:', error);
+          }
+        } catch(err) {
+          console.error('Insert error:', err);
+        }
+      }
+
       window.showToast((window.currentLang === 'ar') ? 'تم تسجيل تقييمك بنجاح! ★★★★★' : 'RATING SUBMITTED SUCCESSFULLY! ★★★★★');
 
-      // 4. الحفظ في Supabase في الخلفية بدون ما يعطّل العميل
-      if (supabase) {
-        supabase.from('reviews').insert([{ rating: selectedScore }]).then(() => {}).catch(() => {});
-      }
+      // جلب البيانات فوراً من Supabase وتحديث أرقام الصفحة في كل الأجهزة
+      await fetchLiveStats();
     };
 
+    /* جلب البيانات العالمية الصافية من Supabase لتتطابق في جميع الأجهزة */
     async function fetchLiveStats() {
-      let freshVisits = parseInt(localStorage.getItem(STORAGE_VISITS_KEY) || '0', 10) + 1;
-      localStorage.setItem(STORAGE_VISITS_KEY, freshVisits);
+      const sb = getSupabase();
+      let allReviews = [];
+      let totalVisits = parseInt(localStorage.getItem('vortx_local_visits') || '0', 10) + 1;
+      localStorage.setItem('vortx_local_visits', totalVisits);
 
-      if (supabase) {
+      if (sb) {
         try {
-          await supabase.from('page_views').insert([{}]);
-          const { count } = await supabase.from('page_views')
-            .select('*', { count: 'exact', head: true })
-            .gte('created_at', FRESH_LAUNCH_EPOCH);
-          if (count !== null) freshVisits = count;
+          await sb.from('page_views').insert([{}]);
         } catch(e) {}
+
+        try {
+          const { count, error: viewErr } = await sb.from('page_views').select('*', { count: 'exact', head: true });
+          if (count !== null && !viewErr) {
+            totalVisits = count;
+          }
+        } catch(e) {}
+
+        try {
+          // جلب كل التقييمات المخزنة في Supabase لجميع الزوار على مر السنين
+          const { data, error: revErr } = await sb
+            .from('reviews')
+            .select('rating, created_at')
+            .order('created_at', { ascending: false });
+
+          if (data && !revErr) {
+            allReviews = data;
+          }
+        } catch(e) {
+          console.error('Error fetching global reviews:', e);
+        }
       }
 
       const viewsEl = document.getElementById('live-views-count');
       if (viewsEl) { 
-        viewsEl.setAttribute('data-target', freshVisits); 
-        viewsEl.textContent = freshVisits.toLocaleString('en-US'); 
+        viewsEl.setAttribute('data-target', totalVisits); 
+        viewsEl.textContent = totalVisits.toLocaleString('en-US'); 
       }
 
-      let freshReviews = JSON.parse(localStorage.getItem(STORAGE_REVIEWS_KEY) || '[]');
-
-      if (supabase) {
-        try {
-          const { data } = await supabase.from('reviews')
-            .select('rating, created_at')
-            .gte('created_at', FRESH_LAUNCH_EPOCH)
-            .order('created_at', { ascending: false });
-          if (data && data.length > 0) {
-            freshReviews = data;
-            localStorage.setItem(STORAGE_REVIEWS_KEY, JSON.stringify(freshReviews));
-          }
-        } catch(e) {}
-      }
-
-      applyRatingNumbersDirectly(freshReviews);
+      applyRatingStats(allReviews);
     }
 
     (function(){
