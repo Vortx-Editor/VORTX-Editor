@@ -534,7 +534,7 @@
       </div>
     </section>
 
-    <!-- نظام التقييم الصافي بالنجوم (مربوط عالمياً بسوبابيز ليظهر للجميع) -->
+    <!-- نظام التقييم الصافي بالنجوم (مربوط بسوبابيز ليظهر للجميع بشكل دائم) -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 py-12 border-t border-white/10 mt-12 reveal-on-scroll">
       
       <div class="max-w-2xl mx-auto mb-10 p-6 sm:p-8 rounded-3xl glass text-center">
@@ -978,19 +978,15 @@
   (function () {
     "use strict";
 
-    // رابط ومفتاح Supabase الرسمي من كودك الأول
+    // رابط ومفتاح Supabase الرسمي المعتمد في كودك الأصلي
     const SUPABASE_URL = 'https://bcystqufgckekgaqeujx.supabase.co';
     const SUPABASE_KEY = 'Sb_publishable_SuB1uBSawTCoh8G9Z4M-Lw_lrwJ6RIE';
     let supabase = null;
 
-    function getSupabase() {
-      if (!supabase && window.supabase) {
-        supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-      }
-      return supabase;
+    if (window.supabase) {
+      supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
     }
 
-    let globalReviewsList = [];
     let hasRatedThisSession = false;
     let favItems = JSON.parse(localStorage.getItem('vortx_favorites') || '[]');
 
@@ -1067,12 +1063,12 @@
       setTimeout(function () { if (toast && toast.parentNode) toast.parentNode.removeChild(toast); }, 3000);
     };
 
-    /* الحسبة الرياضية الدقيقة للتقييم والنسب */
-    function renderRatingStats(reviewsList) {
+    /* حساب وتحديث الواجهة بالأرقام الحقيقية الموزونة من Supabase */
+    function updateRatingUI(allReviews) {
       const ratingEl = document.getElementById('live-rating-avg');
       const countEl = document.getElementById('live-reviews-count');
 
-      if (!reviewsList || reviewsList.length === 0) {
+      if (!allReviews || allReviews.length === 0) {
         if (ratingEl) { ratingEl.textContent = "0"; }
         if (countEl) { countEl.textContent = "0"; }
         [5, 4, 3, 2, 1].forEach(star => {
@@ -1084,8 +1080,8 @@
         return;
       }
 
-      const total = reviewsList.length;
-      const totalScore = reviewsList.reduce((acc, r) => acc + Number(r.rating || 5), 0);
+      const total = allReviews.length;
+      const totalScore = allReviews.reduce((sum, r) => sum + Number(r.rating || 5), 0);
       const rawAvg = totalScore / total;
       const displayScore = (rawAvg % 1 === 0) ? rawAvg.toFixed(0) : rawAvg.toFixed(1);
 
@@ -1093,9 +1089,9 @@
       if (countEl) { countEl.setAttribute('data-target', total); countEl.textContent = total.toLocaleString('en-US'); }
 
       const counts = { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0 };
-      reviewsList.forEach(r => {
-        const s = Math.min(5, Math.max(1, Math.round(Number(r.rating || 5))));
-        counts[s] = (counts[s] || 0) + 1;
+      allReviews.forEach(r => {
+        const score = Math.min(5, Math.max(1, Math.round(Number(r.rating || 5))));
+        counts[score] = (counts[score] || 0) + 1;
       });
 
       [5, 4, 3, 2, 1].forEach(star => {
@@ -1107,8 +1103,8 @@
       });
     }
 
-    /* إرسال التقييم الفوري وحفظه بالسيرفر العالمي */
-    window.submitUserRating = function() {
+    /* إرسال التقييم: إرسال فوري إلى Supabase مع قفل الزر حتى تحديث الصفحة */
+    window.submitUserRating = async function() {
       if (hasRatedThisSession) {
         const msg = (window.currentLang === 'ar') ? 'تم تسجيل تقييمك بالفعل! حدّث الصفحة للتقييم مجدداً' : 'You already rated! Refresh the page to rate again.';
         window.showToast(msg);
@@ -1125,11 +1121,7 @@
       const selectedScore = parseInt(ratingRadio.value, 10);
       hasRatedThisSession = true;
 
-      // 1. تحديث بصري فوري بالملي ثانية داخل الصفحة
-      globalReviewsList.unshift({ rating: selectedScore, created_at: new Date().toISOString() });
-      renderRatingStats(globalReviewsList);
-
-      // 2. قفل زر التقييم
+      // قفل الزر فوراً
       const submitBtn = document.getElementById('btn-submit-rating-el');
       const submitText = document.getElementById('btn-submit-text');
       if (submitBtn) {
@@ -1140,58 +1132,72 @@
       }
 
       ratingRadio.checked = false;
+      window.showToast((window.currentLang === 'ar') ? 'جاري حفظ تقييمك...' : 'Submitting rating...');
+
+      // 1. تسجيل التقييم محلياً فوراً
+      const newId = 'rev_' + Date.now() + '_' + Math.random().toString(36).substr(2, 7);
+      const newReview = { id: newId, rating: selectedScore, comment: '', reviewer_name: '', created_at: new Date().toISOString() };
+      let localReviews = JSON.parse(localStorage.getItem('vortx_reviews_data') || '[]');
+      localReviews.unshift(newReview);
+      localStorage.setItem('vortx_reviews_data', JSON.stringify(localReviews));
+
+      // 2. إرسال دائم لسوبابيز تماماً كما في الكود الأول
+      if (supabase) {
+        try {
+          await supabase.from('reviews').insert([{ rating: selectedScore, comment: '' }]);
+        } catch(err) {
+          console.error('Supabase error:', err);
+        }
+      }
+
       window.showToast((window.currentLang === 'ar') ? 'تم تسجيل تقييمك بنجاح! ★★★★★' : 'RATING SUBMITTED SUCCESSFULLY! ★★★★★');
 
-      // 3. الحفظ الدائم في قاعدة بيانات Supabase المشتركة
-      const sb = getSupabase();
-      if (sb) {
-        sb.from('reviews').insert([{ rating: selectedScore, comment: '' }]).then(({ error }) => {
-          if (error) console.error('Supabase save error:', error);
-          fetchLiveStats(); // مزامنة نهائية مع السيرفر
-        });
-      }
+      // 3. جلب التحديث الشامل وعكس النتيجة فوراً
+      await fetchLiveStats();
     };
 
-    /* جلب البيانات الدائمة والمشتركة لكل الزوار والأجهزة من Supabase */
+    /* جلب البيانات العالمية الدائمة من Supabase ودمجها عبر الـ Map كما في الكود الأصلي */
     async function fetchLiveStats() {
-      const sb = getSupabase();
-      let totalVisits = parseInt(localStorage.getItem('vortx_local_visits') || '1', 10);
+      let localReviews = JSON.parse(localStorage.getItem('vortx_reviews_data') || '[]');
+      let localVisits = parseInt(localStorage.getItem('vortx_visit_count') || '0', 10) + 1;
+      localStorage.setItem('vortx_visit_count', localVisits);
 
-      if (sb) {
+      if (supabase) {
         try {
-          await sb.from('page_views').insert([{}]);
+          await supabase.from('page_views').insert([{}]);
+          const { count } = await supabase.from('page_views').select('*', { count: 'exact', head: true });
+          if (count !== null && count > 0) localVisits = Math.max(localVisits, count);
         } catch(e) {}
+      }
 
+      const viewsEl = document.getElementById('live-views-count');
+      if (viewsEl) { 
+        viewsEl.setAttribute('data-target', localVisits); 
+        viewsEl.textContent = localVisits.toLocaleString('en-US'); 
+      }
+
+      let uniqueMap = new Map();
+      localReviews.forEach(r => { 
+        const key = r.id || `${r.created_at}_${r.rating}`;
+        uniqueMap.set(key, r); 
+      });
+
+      if (supabase) {
         try {
-          const { count, error } = await sb.from('page_views').select('*', { count: 'exact', head: true });
-          if (count !== null && !error) {
-            totalVisits = count;
-            localStorage.setItem('vortx_local_visits', totalVisits);
-          }
-        } catch(e) {}
-
-        try {
-          // قراءة جميع التقييمات المخزنة في السيرفر لجميع الناس على مر السنين
-          const { data, error } = await sb
-            .from('reviews')
-            .select('rating, created_at')
-            .order('created_at', { ascending: false });
-
-          if (data && !error && data.length > 0) {
-            globalReviewsList = data;
+          const { data } = await supabase.from('reviews').select('*').order('created_at', { ascending: false });
+          if (data && data.length > 0) {
+            data.forEach(dbr => {
+              const key = dbr.id || `${dbr.created_at}_${dbr.rating}`;
+              uniqueMap.set(key, dbr);
+            });
           }
         } catch(e) {
           console.error('Error fetching reviews:', e);
         }
       }
 
-      const viewsEl = document.getElementById('live-views-count');
-      if (viewsEl) { 
-        viewsEl.setAttribute('data-target', totalVisits); 
-        viewsEl.textContent = totalVisits.toLocaleString('en-US'); 
-      }
-
-      renderRatingStats(globalReviewsList);
+      let allReviews = Array.from(uniqueMap.values());
+      updateRatingUI(allReviews);
     }
 
     (function(){
