@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <title>VORTX — Premium Digital Assets</title>
 <meta name="theme-color" content="#09090c" />
-<!-- رابط الفيديو المحسّن سريع التحميل للجوال -->
 <link rel="preload" href="https://res.cloudinary.com/eon6wcph/video/upload/q_auto,w_1080/v1/VORTX_4K_CLEAN_FULL_kd7uui.mp4" as="video" type="video/mp4">
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -42,7 +41,6 @@
     --globe-line: 205, 210, 200; --globe-ring: 190, 195, 185; --globe-point: 233, 236, 228; --loader-bg: #050505;
   }
 
-  /* الوضع النهاري واضح ونظيف جداً */
   html.light {
     --ink: #0f172a; --bg-color: #f8fafc; --text-color: #0f172a; --subtext-color: #475569;
     --star-bg: #f1f5f9; --star-opacity: 1; --btn-text-color: #ffffff;
@@ -63,6 +61,30 @@
   html.light .text-white { color: #0f172a !important; }
   html.light .text-slate-300 { color: #475569 !important; }
   html.light .glass { background: #ffffff !important; border: 1.5px solid #cbd5e1 !important; box-shadow: 0 10px 30px rgba(0,0,0,0.05) !important; }
+
+  /* ========================================================
+     تثبيت وضوح زر وكلمة (Explore Packages) فوق الفيديو في كل الأوضاع
+     ======================================================== */
+  #bundles .vortx-explore-btn,
+  #bundles .vortx-explore-btn span,
+  #bundles .vortx-explore-btn * {
+    color: #ffffff !important;
+  }
+  #bundles [data-i18n="tiers-available"] {
+    color: rgba(255, 255, 255, 0.9) !important;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.8) !important;
+  }
+  #bundles .vortx-explore-btn {
+    background: rgba(10, 10, 15, 0.8) !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.4) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), inset 0 1px 2px rgba(255, 255, 255, 0.4) !important;
+    backdrop-filter: blur(12px) !important;
+  }
+  #bundles .vortx-explore-btn:hover {
+    background: rgba(255, 255, 255, 0.25) !important;
+    border-color: #ffffff !important;
+    transform: scale(1.03) !important;
+  }
 
   /* وضوح التبويبات بالوضع النهاري */
   html.light .glass-tab-container { background: #ffffff !important; border: 1.5px solid #94a3b8 !important; box-shadow: 0 4px 20px rgba(0,0,0,0.06) !important; }
@@ -86,7 +108,6 @@
   #preview-price-display { color: #facc15 !important; font-weight: 900 !important; }
   .modal-close-btn { color: #ffffff !important; background: rgba(0, 0, 0, 0.85) !important; border: 1px solid rgba(255, 255, 255, 0.3) !important; }
 
-  /* النجوم لاختيار التقييم */
   .radio { display: flex; justify-content: center; gap: 14px; margin-bottom: 1.25rem; direction: ltr; }
   .radio > input { position: absolute; appearance: none; opacity: 0; }
   .radio > label { cursor: pointer; font-size: 36px; position: relative; display: inline-block; transition: transform 0.25s ease; }
@@ -400,7 +421,6 @@
         </div>
       </div>
 
-      <!-- روابط التواصل: التليجرام يفتح قناة فورتكس الرسمية -->
       <div class="absolute bottom-2 sm:-bottom-8 md:-bottom-16 lg:-bottom-20 left-1/2 -translate-x-1/2 w-[90%] max-w-[520px] flex items-center justify-around px-6 sm:px-8 py-4 sm:py-5 rounded-full border border-white/10 glass backdrop-blur-md opacity-80 z-30" dir="rtl">
         <a href="https://www.tiktok.com/@v_ortx?_r=1&_t=ZS-98pGOR9h9Ca" target="_blank" rel="noopener noreferrer" title="TikTok" class="hover:scale-110 hover:opacity-100 transition-all text-current">
           <svg class="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
@@ -417,7 +437,7 @@
       </div>
     </section>
 
-    <!-- قسم الباقات مع الفيديو سريع التحميل والتشغيل المضمون -->
+    <!-- قسم الباقات مع الفيديو سريع التحميل والتشغيل المضمون وزر واضح في كل الأوضاع -->
     <section id="bundles" class="max-w-7xl mx-auto px-4 sm:px-6 pt-20 sm:pt-28 md:pt-36 pb-12 reveal-on-scroll">
       <div class="relative w-full h-[360px] sm:h-[460px] rounded-3xl overflow-hidden shadow-2xl border border-white/10 group">
         <video 
@@ -431,7 +451,6 @@
           preload="auto"
           class="w-full h-full object-cover" 
           style="pointer-events: none;">
-          <!-- رابط 1080p الخفيف والمضغوط للجوال مع الرجوع للرابط الأصلي عند اللزوم -->
           <source src="https://res.cloudinary.com/eon6wcph/video/upload/q_auto,w_1080/v1/VORTX_4K_CLEAN_FULL_kd7uui.mp4" type="video/mp4">
           <source src="https://res.cloudinary.com/eon6wcph/video/upload/v1/VORTX_4K_CLEAN_FULL_kd7uui.mp4" type="video/mp4">
         </video>
@@ -439,11 +458,11 @@
         <div class="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black/80 via-black/40 to-transparent pointer-events-none"></div>
 
         <div class="absolute inset-x-0 bottom-8 flex flex-col items-center justify-center gap-2 z-20 px-4">
-          <span class="text-[10px] font-mono tracking-[0.3em] uppercase text-slate-300 opacity-90 drop-shadow-md" data-i18n="tiers-available">3 Tiers Available</span>
+          <span class="text-[11px] font-mono tracking-[0.3em] uppercase opacity-90 drop-shadow-md font-bold" data-i18n="tiers-available">3 Tiers Available</span>
           <div onclick="window.openWebTiers()" class="vortx-explore-btn group/btn">
             <div class="flex items-center gap-3">
-              <span class="font-head font-extrabold text-xs sm:text-sm tracking-[0.2em] uppercase text-white drop-shadow" data-i18n="explore-packages">Explore Packages</span>
-              <span class="text-white transform transition-transform duration-300 group-hover/btn:translate-x-1.5">→</span>
+              <span class="font-head font-extrabold text-xs sm:text-sm tracking-[0.2em] uppercase drop-shadow" data-i18n="explore-packages">Explore Packages</span>
+              <span class="transform transition-transform duration-300 group-hover/btn:translate-x-1.5 font-bold">→</span>
             </div>
           </div>
         </div>
@@ -515,7 +534,7 @@
       </div>
     </section>
 
-    <!-- نظام التقييم الصافي بالنجوم فقط (تقييم واحد لكل تحديث صفحة) -->
+    <!-- نظام التقييم الصافي بالنجوم فقط (تحديث فوري خلال ثانية واحدة) -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 py-12 border-t border-white/10 mt-12 reveal-on-scroll">
       
       <div class="max-w-2xl mx-auto mb-10 p-6 sm:p-8 rounded-3xl glass text-center">
@@ -584,7 +603,7 @@
     </footer>
   </main>
 
-  <!-- صفحة باقات الويب مع الربط بحساب التليجرام الشخصي -->
+  <!-- صفحة باقات الويب مع التعديلات الجديدة للمدد والربط بتليجرام الشخصي -->
   <section id="web-view" class="view view-hidden relative z-10 min-h-screen">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
       <div class="flex items-center justify-between mb-10">
@@ -613,7 +632,7 @@
             </ul>
           </div>
           <div class="mt-2 text-center">
-            <div class="delivery_text" data-i18n="plan-s-del">Delivery: 7 Days</div>
+            <div class="delivery_text" data-i18n="plan-s-del">Delivery: 10 Days</div>
             <button type="button" onclick="window.openTelegramOrder('STARTER', 150)" class="glass-btn-center">
               <span data-i18n="select-plan">Buy Now</span>
             </button>
@@ -639,7 +658,7 @@
             </ul>
           </div>
           <div class="mt-2 text-center">
-            <div class="delivery_text" data-i18n="plan-p-del">Delivery: 7–12 Days</div>
+            <div class="delivery_text" data-i18n="plan-p-del">Delivery: 14–20 Days</div>
             <button type="button" onclick="window.openTelegramOrder('PREMIUM', 300)" class="glass-btn-center">
               <span data-i18n="select-plan">Buy Now</span>
             </button>
@@ -665,7 +684,7 @@
             </ul>
           </div>
           <div class="mt-2 text-center">
-            <div class="delivery_text" data-i18n="plan-v-del">Delivery: 15–20 Days</div>
+            <div class="delivery_text" data-i18n="plan-v-del">Delivery: 20–30 Days</div>
             <button type="button" onclick="window.openTelegramOrder('ELITE', 600)" class="glass-btn-center">
               <span data-i18n="select-plan">Buy Now</span>
             </button>
@@ -704,7 +723,6 @@
 </div>
 
 <script>
-  /* إجبار تشغيل الفيديو فوراً وبدون أي لاق بالجوال واللابتوب */
   function forcePlayBundleVideo() {
     const v = document.getElementById('vortx-bundle-video');
     if (!v) return;
@@ -717,7 +735,6 @@
     const playPromise = v.play();
     if (playPromise !== undefined) {
       playPromise.catch(function() {
-        // تشغيل مباشر عند أول لمسة أو سحب للشاشة في حال توفير الطاقة بالجوال
         const startOnTouch = function() {
           v.muted = true;
           v.play();
@@ -787,7 +804,6 @@
   });
   window.addEventListener('load', forcePlayBundleVideo);
 
-  /* دالة طلب الباقات: تحول لحسابك الشخصي wot_5 مباشرة مع رسالة مخصصة */
   window.openTelegramOrder = function(planName, price) {
     const telegramUsername = 'wot_5'; 
     const message = `Hey VORTX! I want to purchase the ${planName} package ($${price}).`;
@@ -970,14 +986,12 @@
       supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
     }
 
-    // تنظيف المخزن القديم وتصفير البيانات لبدء حقيقي جديد
-    localStorage.removeItem('vortx_visit_count');
-    localStorage.removeItem('vortx_reviews_data');
+    // تصفير المخزن من جديد بمفتاح ناصع جديد لتجاهل أي تقييمات سابقة
+    const STORAGE_REVIEWS_KEY = 'vortx_clean_reviews_v5';
+    const STORAGE_VISITS_KEY = 'vortx_clean_visits_v5';
+    const FRESH_LAUNCH_EPOCH = '2026-09-11T16:45:00.000Z';
 
-    // تاريخ بداية الإطلاق لتجاهل كل البيانات التجريبية الـ 39 القديمة في Supabase
-    const FRESH_LAUNCH_EPOCH = '2026-09-11T16:00:00.000Z';
-
-    let hasRatedThisSession = false; // تقييم واحد فقط حتى يتم تحديث الصفحة
+    let hasRatedThisSession = false;
     let favItems = JSON.parse(localStorage.getItem('vortx_favorites') || '[]');
 
     window.updateBadges = function() {
@@ -1053,8 +1067,47 @@
       setTimeout(function () { if (toast && toast.parentNode) toast.parentNode.removeChild(toast); }, 3000);
     };
 
-    /* إرسال التقييم بالنجوم: مسموح مرة واحدة فقط حتى تحديث الصفحة */
-    window.submitUserRating = async function() {
+    /* دالة تحديث الواجهة فورياً وبدون أي تأخير */
+    function applyRatingNumbersDirectly(reviewsList) {
+      const ratingEl = document.getElementById('live-rating-avg');
+      const countEl = document.getElementById('live-reviews-count');
+
+      if (!reviewsList || reviewsList.length === 0) {
+        if (ratingEl) { ratingEl.setAttribute('data-target', "0"); ratingEl.textContent = "0"; }
+        if (countEl) { countEl.setAttribute('data-target', "0"); countEl.textContent = "0"; }
+        [5, 4, 3, 2, 1].forEach(star => {
+          const barEl = document.getElementById(`bar-${star}`); 
+          const pctEl = document.getElementById(`pct-${star}`);
+          if (barEl) barEl.style.width = '0%'; 
+          if (pctEl) pctEl.textContent = '0%';
+        });
+        return;
+      }
+
+      const total = reviewsList.length;
+      const sum = reviewsList.reduce((acc, r) => acc + Number(r.rating || 5), 0);
+      const avg = (sum / total).toFixed(1);
+
+      if (ratingEl) { ratingEl.setAttribute('data-target', avg); ratingEl.textContent = avg; }
+      if (countEl) { countEl.setAttribute('data-target', total); countEl.textContent = total.toLocaleString('en-US'); }
+
+      const counts = { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0 };
+      reviewsList.forEach(r => {
+        const s = Math.min(5, Math.max(1, Number(r.rating || 5)));
+        counts[s] = (counts[s] || 0) + 1;
+      });
+
+      [5, 4, 3, 2, 1].forEach(star => {
+        const pct = Math.round((counts[star] / total) * 100) || 0;
+        const barEl = document.getElementById(`bar-${star}`); 
+        const pctEl = document.getElementById(`pct-${star}`);
+        if (barEl) barEl.style.width = pct + '%'; 
+        if (pctEl) pctEl.textContent = pct + '%';
+      });
+    }
+
+    /* إرسال التقييم: ينعكس على الفور خلال 0.1 ثانية ومسموح مرة واحدة لكل تحديث */
+    window.submitUserRating = function() {
       if (hasRatedThisSession) {
         const msg = (window.currentLang === 'ar') ? 'تم تسجيل تقييمك بالفعل! حدّث الصفحة للتقييم مجدداً' : 'You already rated! Refresh the page to rate again.';
         window.showToast(msg);
@@ -1069,27 +1122,21 @@
       }
       
       const selectedScore = parseInt(ratingRadio.value, 10);
-      window.showToast('SUBMITTING YOUR RATING...');
-      
-      const newReview = { 
+      hasRatedThisSession = true;
+
+      // 1. التحديث الفوري المباشر للمخزن المحلي
+      let localReviews = JSON.parse(localStorage.getItem(STORAGE_REVIEWS_KEY) || '[]');
+      localReviews.unshift({ 
         id: 'rev_' + Date.now(), 
         rating: selectedScore, 
         created_at: new Date().toISOString() 
-      };
+      });
+      localStorage.setItem(STORAGE_REVIEWS_KEY, JSON.stringify(localReviews));
 
-      let freshReviews = JSON.parse(localStorage.getItem('vortx_reviews_fresh') || '[]');
-      freshReviews.unshift(newReview);
-      localStorage.setItem('vortx_reviews_fresh', JSON.stringify(freshReviews));
+      // 2. عكس التقييم فوراً بالواجهة بدون انتظار أي شبكة
+      applyRatingNumbersDirectly(localReviews);
 
-      if (supabase) {
-        try {
-          await supabase.from('reviews').insert([{ rating: selectedScore }]);
-        } catch(e) {}
-      }
-
-      hasRatedThisSession = true;
-
-      // قفل زر التقييم وإظهار علامة تم
+      // 3. قفل الزر وتأكيد النجاح
       const submitBtn = document.getElementById('btn-submit-rating-el');
       const submitText = document.getElementById('btn-submit-text');
       if (submitBtn) {
@@ -1100,14 +1147,17 @@
       }
 
       ratingRadio.checked = false;
-      window.showToast('RATING SUBMITTED SUCCESSFULLY! ★★★★★');
-      fetchLiveStats();
+      window.showToast((window.currentLang === 'ar') ? 'تم تسجيل تقييمك بنجاح! ★★★★★' : 'RATING SUBMITTED SUCCESSFULLY! ★★★★★');
+
+      // 4. الحفظ في Supabase في الخلفية بدون ما يعطّل العميل
+      if (supabase) {
+        supabase.from('reviews').insert([{ rating: selectedScore }]).then(() => {}).catch(() => {});
+      }
     };
 
-    /* جلب الإحصائيات مع الحسبة الدقيقة جداً بالكسور */
     async function fetchLiveStats() {
-      let freshVisits = parseInt(localStorage.getItem('vortx_visits_fresh') || '0', 10) + 1;
-      localStorage.setItem('vortx_visits_fresh', freshVisits);
+      let freshVisits = parseInt(localStorage.getItem(STORAGE_VISITS_KEY) || '0', 10) + 1;
+      localStorage.setItem(STORAGE_VISITS_KEY, freshVisits);
 
       if (supabase) {
         try {
@@ -1125,7 +1175,7 @@
         viewsEl.textContent = freshVisits.toLocaleString('en-US'); 
       }
 
-      let freshReviews = JSON.parse(localStorage.getItem('vortx_reviews_fresh') || '[]');
+      let freshReviews = JSON.parse(localStorage.getItem(STORAGE_REVIEWS_KEY) || '[]');
 
       if (supabase) {
         try {
@@ -1135,48 +1185,12 @@
             .order('created_at', { ascending: false });
           if (data && data.length > 0) {
             freshReviews = data;
+            localStorage.setItem(STORAGE_REVIEWS_KEY, JSON.stringify(freshReviews));
           }
         } catch(e) {}
       }
 
-      const ratingEl = document.getElementById('live-rating-avg');
-      const countEl = document.getElementById('live-reviews-count');
-
-      if (freshReviews.length > 0) {
-        const totalReviews = freshReviews.length;
-        const totalScore = freshReviews.reduce((sum, r) => sum + Number(r.rating || 5), 0);
-        
-        // الحسبة الدقيقة جداً (مثل 51 / 11 = 4.6)
-        const rawAvg = totalScore / totalReviews;
-        const displayScore = rawAvg.toFixed(1);
-        
-        if (ratingEl) { ratingEl.setAttribute('data-target', displayScore); ratingEl.textContent = displayScore; }
-        if (countEl) { countEl.setAttribute('data-target', totalReviews); countEl.textContent = totalReviews.toLocaleString('en-US'); }
-
-        const counts = { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0 };
-        freshReviews.forEach(r => { 
-          const score = Math.min(5, Math.max(1, Number(r.rating || 5))); 
-          counts[score] = (counts[score] || 0) + 1; 
-        });
-
-        [5, 4, 3, 2, 1].forEach(star => {
-          const pct = Math.round((counts[star] / totalReviews) * 100) || 0;
-          const barEl = document.getElementById(`bar-${star}`); 
-          const pctEl = document.getElementById(`pct-${star}`);
-          if (barEl) barEl.style.width = pct + '%'; 
-          if (pctEl) pctEl.textContent = pct + '%';
-        });
-      } else {
-        // إذا لم يكن هناك تقييمات جديدة، يظهر 0 بكل وضوح
-        if (ratingEl) { ratingEl.setAttribute('data-target', "0"); ratingEl.textContent = "0"; }
-        if (countEl) { countEl.setAttribute('data-target', "0"); countEl.textContent = "0"; }
-        [5, 4, 3, 2, 1].forEach(star => {
-          const barEl = document.getElementById(`bar-${star}`); 
-          const pctEl = document.getElementById(`pct-${star}`);
-          if (barEl) barEl.style.width = '0%'; 
-          if (pctEl) pctEl.textContent = '0%';
-        });
-      }
+      applyRatingNumbersDirectly(freshReviews);
     }
 
     (function(){
@@ -1222,9 +1236,9 @@
         "stat-subscribers": "Satisfied Clients", "stat-views": "Total Visits", "stat-orders": "Quality Guarantee", "stat-rating": "Satisfaction Score", 
         "review-title": "Leave Your Rating", "review-sub": "Select your star rating for VORTX Studio", "rating-breakdown": "RATING DISTRIBUTION", "btn-submit-rating": "Submit Rating",
         "select-plan": "Buy Now",
-        "plan-s-title": "STARTER", "plan-s-price": "$150", "plan-s-f1": "1 High-Converting Landing Page", "plan-s-f2": "Up to 4 Custom Sections", "plan-s-f3": "Fully Responsive & Mobile-Optimized", "plan-s-f4": "Smooth Basic Animations", "plan-s-f5": "1 Revision Included", "plan-s-del": "Delivery: 7 Days",
-        "plan-p-title": "PREMIUM", "plan-p-price": "$300", "plan-p-f1": "Up to 3 Custom Web Pages", "plan-p-f2": "Up to 8 Designed Sections", "plan-p-f3": "Advanced UI/UX & Interactions", "plan-p-f4": "Social Media & Channel Integration", "plan-p-f5": "3 Revisions Included", "plan-p-del": "Delivery: 7–12 Days",
-        "plan-v-title": "ELITE", "plan-v-price": "$600", "plan-v-f1": "Up to 6 Custom Pages", "plan-v-f2": "Up to 15 Dynamic Sections", "plan-v-f3": "Bespoke 3D & Advanced VFX Effects", "plan-v-f4": "Custom Interactive Elements", "plan-v-f5": "Priority Support & Consultation", "plan-v-del": "Delivery: 15–20 Days"
+        "plan-s-title": "STARTER", "plan-s-price": "$150", "plan-s-f1": "1 High-Converting Landing Page", "plan-s-f2": "Up to 4 Custom Sections", "plan-s-f3": "Fully Responsive & Mobile-Optimized", "plan-s-f4": "Smooth Basic Animations", "plan-s-f5": "1 Revision Included", "plan-s-del": "Delivery: 10 Days",
+        "plan-p-title": "PREMIUM", "plan-p-price": "$300", "plan-p-f1": "Up to 3 Custom Web Pages", "plan-p-f2": "Up to 8 Designed Sections", "plan-p-f3": "Advanced UI/UX & Interactions", "plan-p-f4": "Social Media & Channel Integration", "plan-p-f5": "3 Revisions Included", "plan-p-del": "Delivery: 14–20 Days",
+        "plan-v-title": "ELITE", "plan-v-price": "$600", "plan-v-f1": "Up to 6 Custom Pages", "plan-v-f2": "Up to 15 Dynamic Sections", "plan-v-f3": "Bespoke 3D & Advanced VFX Effects", "plan-v-f4": "Custom Interactive Elements", "plan-v-f5": "Priority Support & Consultation", "plan-v-del": "Delivery: 20–30 Days"
       },
       ar: { 
         "nav-bundles": "الحزم", "nav-packs": "حزم متميزة", "nav-categories": "الأقسام", 
@@ -1242,9 +1256,9 @@
         "stat-subscribers": "عملاء راضون", "stat-views": "إجمالي الزيارات", "stat-orders": "ضمان الجودة", "stat-rating": "معدل التقييم", 
         "review-title": "اترك تقييمك", "review-sub": "اختر تقييمك بالنجوم لفورتكس ستوديو", "rating-breakdown": "توزيع التقييمات", "btn-submit-rating": "إرسال التقييم",
         "select-plan": "شراء الآن",
-        "plan-s-title": "البداية", "plan-s-price": "150$", "plan-s-f1": "صفحة هبوط احترافية عالي التحويل", "plan-s-f2": "حتى 4 أقسام مخصصة", "plan-s-f3": "متوافق بالكامل مع الجوال والشاشات", "plan-s-f4": "تحريكات أساسية سلسة", "plan-s-f5": "تعديل واحد مشمول", "plan-s-del": "التسليم: 7 أيام",
-        "plan-p-title": "المميزة", "plan-p-price": "300$", "plan-p-f1": "حتى 3 صفحات ويب مخصصة", "plan-p-f2": "حتى 8 أقسام مصممة", "plan-p-f3": "واجهة وتفاعلات متقدمة", "plan-p-f4": "ربط شبكات التواصل والقنوات", "plan-p-f5": "3 تعديلات مشمولة", "plan-p-del": "التسليم: 7-12 يوم",
-        "plan-v-title": "النخبة", "plan-v-price": "600$", "plan-v-f1": "حتى 6 صفحات مخصصة", "plan-v-f2": "حتى 15 قسم تفاعلي", "plan-v-f3": "تصميم 3D ومؤثرات بصرية خاصة", "plan-v-f4": "عناصر تفاعلية مخصصة", "plan-v-f5": "أولوية الدعم والاستشارات", "plan-v-del": "التسليم: 15-20 يوم"
+        "plan-s-title": "البداية", "plan-s-price": "150$", "plan-s-f1": "صفحة هبوط احترافية عالي التحويل", "plan-s-f2": "حتى 4 أقسام مخصصة", "plan-s-f3": "متوافق بالكامل مع الجوال والشاشات", "plan-s-f4": "تحريكات أساسية سلسة", "plan-s-f5": "تعديل واحد مشمول", "plan-s-del": "التسليم: 10 أيام",
+        "plan-p-title": "المميزة", "plan-p-price": "300$", "plan-p-f1": "حتى 3 صفحات ويب مخصصة", "plan-p-f2": "حتى 8 أقسام مصممة", "plan-p-f3": "واجهة وتفاعلات متقدمة", "plan-p-f4": "ربط شبكات التواصل والقنوات", "plan-p-f5": "3 تعديلات مشمولة", "plan-p-del": "التسليم: 14-20 يوم",
+        "plan-v-title": "النخبة", "plan-v-price": "600$", "plan-v-f1": "حتى 6 صفحات مخصصة", "plan-v-f2": "حتى 15 قسم تفاعلي", "plan-v-f3": "تصميم 3D ومؤثرات بصرية خاصة", "plan-v-f4": "عناصر تفاعلية مخصصة", "plan-v-f5": "أولوية الدعم والاستشارات", "plan-v-del": "التسليم: 20-30 يوم"
       }
     };
     
