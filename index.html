@@ -978,13 +978,24 @@
   (function () {
     "use strict";
 
-    // رابط ومفتاح Supabase الرسمي المعتمد في كودك الأصلي
+    // رابط ومفتاح Supabase الرسمي (بصيغة الحروف الصغيرة المطابقة لنظام الأمان في Kong)
     const SUPABASE_URL = 'https://bcystqufgckekgaqeujx.supabase.co';
-    const SUPABASE_KEY = 'Sb_publishable_SuB1uBSawTCoh8G9Z4M-Lw_lrwJ6RIE';
+    const SUPABASE_KEY = 'sb_publishable_SuB1uBSawTCoh8G9Z4M-Lw_lrwJ6RIE';
     let supabase = null;
 
-    if (window.supabase) {
-      supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    function getSupabase() {
+      if (!supabase && window.supabase && window.supabase.createClient) {
+        try {
+          supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        } catch(e) {
+          try {
+            supabase = window.supabase.createClient(SUPABASE_URL, 'Sb_publishable_SuB1uBSawTCoh8G9Z4M-Lw_lrwJ6RIE');
+          } catch(e2) {
+            console.error('Supabase client error:', e2);
+          }
+        }
+      }
+      return supabase;
     }
 
     let hasRatedThisSession = false;
@@ -1154,9 +1165,10 @@
       window.showToast((window.currentLang === 'ar') ? 'تم تسجيل تقييمك بنجاح! ★★★★★' : 'RATING SUBMITTED SUCCESSFULLY! ★★★★★');
 
       // 3. الحفظ الدائم في سيرفر Supabase السحابي
-      if (supabase) {
+      const sb = getSupabase();
+      if (sb) {
         try {
-          await supabase.from('reviews').insert([{ rating: selectedScore, comment: '', reviewer_name: 'Client' }]);
+          await sb.from('reviews').insert([{ rating: selectedScore, comment: 'Client Rating', reviewer_name: 'Client' }]);
           await fetchLiveStats(); // مزامنة حقيقية لتطابق كل الأجهزة
         } catch(err) {
           console.error('Supabase error:', err);
@@ -1174,15 +1186,16 @@
       if (viewsEl) viewsEl.textContent = localVisits.toLocaleString('en-US');
       renderRatingStats(localReviews);
 
-      if (!supabase) return;
+      const sb = getSupabase();
+      if (!sb) return;
 
       // 2. مزامنة سريعة وبالتوازي مع Supabase بدون ما يعلّق أي عداد
       try {
         const visitPromise = (async () => {
           try {
-            await supabase.from('page_views').insert([{}]);
-            const { count } = await supabase.from('page_views').select('*', { count: 'exact', head: true });
-            if (count !== null && count > 0) {
+            await sb.from('page_views').insert([{}]);
+            const { count } = await sb.from('page_views').select('*', { count: 'exact', head: true });
+            if (count !== null && count !== undefined && count > 0) {
               localVisits = count;
               localStorage.setItem('vortx_visit_count', localVisits);
               if (viewsEl) viewsEl.textContent = localVisits.toLocaleString('en-US');
@@ -1192,7 +1205,7 @@
 
         const reviewPromise = (async () => {
           try {
-            const { data, error } = await supabase.from('reviews').select('*').order('created_at', { ascending: false });
+            const { data, error } = await sb.from('reviews').select('*').order('created_at', { ascending: false });
             if (data && !error && data.length > 0) {
               localReviews = data;
               localStorage.setItem('vortx_reviews_data', JSON.stringify(localReviews));
