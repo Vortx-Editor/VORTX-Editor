@@ -40,24 +40,86 @@
     --card-bg: rgba(255, 255, 255, 0.04); --card-border: rgba(255, 255, 255, 0.1);
     --globe-line: 205, 210, 200; --globe-ring: 190, 195, 185; --globe-point: 233, 236, 228; --loader-bg: #050505;
   }
+
+  /* ========================================================
+     ضبط الوضع النهاري (Light Mode) ليكون فخم وواضح جداً
+     ======================================================== */
   html.light {
-    --ink: #17131F; --bg-color: #F4F2F7; --text-color: #17131F; --subtext-color: #625D6B;
-    --star-bg: #F4F2F7; --star-opacity: 1; --btn-text-color: #ffffff;
-    --card-bg: rgba(255, 255, 255, 0.75); --card-border: rgba(210, 215, 225, 0.3);
-    --globe-line: 100, 116, 139; --globe-ring: 71, 85, 105; --globe-point: 30, 41, 59; --loader-bg: #F4F2F7;
+    --ink: #0f172a; --bg-color: #f8fafc; --text-color: #0f172a; --subtext-color: #475569;
+    --star-bg: #f1f5f9; --star-opacity: 1; --btn-text-color: #ffffff;
+    --card-bg: #ffffff; --card-border: #cbd5e1;
+    --globe-line: 71, 85, 105; --globe-ring: 100, 116, 139; --globe-point: 15, 23, 42; --loader-bg: #f8fafc;
   }
+
   * , *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { max-width: 100vw; overflow-x: clip; scroll-behavior: smooth; }
   body { width: 100%; min-height: 100vh; background-color: var(--bg-color); color: var(--text-color); font-family: 'Inter', sans-serif; transition: background-color .4s ease, color .4s ease; -webkit-font-smoothing: antialiased; position: relative; }
-  html.light body::before { content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none; background: radial-gradient(circle at 15% 30%, rgba(200, 205, 220, 0.08), transparent 45%), radial-gradient(circle at 85% 70%, rgba(200, 205, 220, 0.06), transparent 45%); }
+  html.light body::before { content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none; background: radial-gradient(circle at 15% 30%, rgba(148, 163, 184, 0.1), transparent 45%), radial-gradient(circle at 85% 70%, rgba(148, 163, 184, 0.08), transparent 45%); }
   html.vx-loading, html.vx-loading body { overflow: hidden !important; }
   .card-3d, .cat-card-glass, .tier-card, header { transform: translateZ(0); backface-visibility: hidden; }
   .reveal-on-scroll { opacity: 0; transform: translateY(40px); transition: opacity 1.8s cubic-bezier(0.16, 1, 0.3, 1), transform 1.8s cubic-bezier(0.16, 1, 0.3, 1); will-change: opacity, transform; }
   .reveal-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
   
   html.light p, html.light span, html.light h2, html.light h3, html.light h4 { color: var(--text-color); }
-  html.light .text-white { color: #17131F !important; }
-  html.light .text-slate-300 { color: #625D6B !important; }
+  html.light .text-white { color: #0f172a !important; }
+  html.light .text-slate-300 { color: #475569 !important; }
+  html.light .glass { background: #ffffff !important; border: 1.5px solid #cbd5e1 !important; box-shadow: 0 10px 30px rgba(0,0,0,0.05) !important; }
+
+  /* وضوح زر التبويبات الرئيسي CC, XML, SHAKE, FREE في الوضع النهاري */
+  html.light .glass-tab-container {
+    background: #ffffff !important;
+    border: 1.5px solid #94a3b8 !important;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06) !important;
+  }
+  html.light .tab-btn {
+    color: #1e293b !important;
+    opacity: 0.85 !important;
+  }
+  html.light .tab-btn:hover {
+    background: #f1f5f9 !important;
+    color: #0f172a !important;
+    opacity: 1 !important;
+  }
+  html.light .tab-btn.active {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%) !important;
+    color: #ffffff !important;
+    opacity: 1 !important;
+    border-color: #0f172a !important;
+    box-shadow: 0 4px 15px rgba(15, 23, 42, 0.3) !important;
+  }
+
+  /* وضوح زر البرامج الفرعي (AM / AE) في الوضع النهاري */
+  html.light .glass-sub-tab-container {
+    background: #ffffff !important;
+    border: 1.5px solid #94a3b8 !important;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04) !important;
+  }
+  html.light .sub-tab-btn {
+    color: #334155 !important;
+    opacity: 0.85 !important;
+  }
+  html.light .sub-tab-btn.active {
+    background: linear-gradient(135deg, #7e22ce, #9333ea) !important;
+    color: #ffffff !important;
+    opacity: 1 !important;
+    box-shadow: 0 4px 12px rgba(126, 34, 204, 0.35) !important;
+  }
+
+  /* وضوح بطاقات الأقسام (Categories) في الوضع النهاري */
+  html.light .cat-card-glass {
+    background: #ffffff !important;
+    border: 1.5px solid #cbd5e1 !important;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.05) !important;
+  }
+  html.light .cat-card-glass:hover {
+    border-color: #7e22ce !important;
+    box-shadow: 0 10px 25px rgba(126, 34, 204, 0.12) !important;
+  }
+  html.light .cat-num-box {
+    background: #f1f5f9 !important;
+    border: 1px solid #cbd5e1 !important;
+    color: #0f172a !important;
+  }
 
   #preview-card {
     background: rgba(15, 15, 22, 0.96) !important;
@@ -77,84 +139,36 @@
     opacity: 1 !important;
   }
 
-  .card-gold-brand {
-    color: #facc15 !important;
-    font-weight: 900 !important;
-    display: inline-block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    text-shadow: 0 2px 6px rgba(0,0,0,0.9) !important;
-  }
+  #preview-title { color: #ffffff !important; font-weight: 900 !important; text-shadow: 0 2px 6px rgba(0,0,0,0.9) !important; }
+  #preview-price-display { color: #facc15 !important; font-weight: 900 !important; }
+  .modal-close-btn { color: #ffffff !important; background: rgba(0, 0, 0, 0.85) !important; border: 1px solid rgba(255, 255, 255, 0.3) !important; }
+  #preview-modal .glass-btn-center { background: linear-gradient(135deg, #7e22ce 0%, #a855f7 100%) !important; color: #ffffff !important; border: 1px solid rgba(255, 255, 255, 0.3) !important; font-weight: 800 !important; box-shadow: 0 4px 15px rgba(126, 34, 204, 0.5) !important; }
+  #preview-fav-btn-text { color: #f87171 !important; font-weight: 800 !important; }
 
-  #preview-title {
-    color: #ffffff !important;
-    font-weight: 900 !important;
-    text-shadow: 0 2px 6px rgba(0,0,0,0.9) !important;
-  }
-
-  #preview-price-display {
-    color: #facc15 !important;
-    font-weight: 900 !important;
-  }
-
-  .modal-close-btn {
-    color: #ffffff !important;
-    background: rgba(0, 0, 0, 0.85) !important;
-    border: 1px solid rgba(255, 255, 255, 0.3) !important;
-  }
-
-  #preview-modal .glass-btn-center {
-    background: linear-gradient(135deg, #7e22ce 0%, #a855f7 100%) !important;
-    color: #ffffff !important;
-    border: 1px solid rgba(255, 255, 255, 0.3) !important;
-    font-weight: 800 !important;
-    box-shadow: 0 4px 15px rgba(126, 34, 204, 0.5) !important;
-  }
-
-  #preview-fav-btn-text {
-    color: #f87171 !important;
-    font-weight: 800 !important;
-  }
-
-  .radio { display: flex; justify-content: center; gap: 12px; margin-bottom: 1.5rem; direction: ltr; }
+  /* خيارات النجوم للتقييم الصافي */
+  .radio { display: flex; justify-content: center; gap: 14px; margin-bottom: 1.25rem; direction: ltr; }
   .radio > input { position: absolute; appearance: none; opacity: 0; }
-  .radio > label { cursor: pointer; font-size: 32px; position: relative; display: inline-block; transition: transform 0.3s ease; }
-  .radio > label > svg { fill: #4b5563; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5)); transition: fill 0.3s ease; }
-  html.light .radio > label > svg { fill: #ffffff; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.15)); }
-  .radio > input:checked ~ label svg, .radio > label:hover svg, .radio > label:hover ~ label svg { fill: #ff9e0b !important; filter: drop-shadow(0 0 12px rgba(255, 158, 11, 0.8)) !important; }
+  .radio > label { cursor: pointer; font-size: 36px; position: relative; display: inline-block; transition: transform 0.25s ease; }
+  .radio > label > svg { fill: #4b5563; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)); transition: fill 0.25s ease, transform 0.25s ease; }
+  html.light .radio > label > svg { fill: #cbd5e1; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1)); }
+  .radio > input:checked ~ label svg, .radio > label:hover svg, .radio > label:hover ~ label svg { fill: #ff9e0b !important; filter: drop-shadow(0 0 12px rgba(255, 158, 11, 0.8)) !important; transform: scale(1.1); }
 
-  #reviews-marquee-track .review-card-item { background: rgba(18, 18, 24, 0.85); border: 1px solid rgba(234, 179, 8, 0.3); }
-  html.light #reviews-marquee-track .review-card-item { background: #ffffff !important; border-color: rgba(203, 213, 225, 0.8) !important; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-  html.light #reviews-marquee-track span.review-author { color: #1e293b !important; }
-  html.light #reviews-marquee-track span.review-comment-text { color: #475569 !important; }
-
-  .container_chat_bot { display: flex; flex-direction: column; max-width: 480px; width: 100%; margin: 0 auto; }
-  .container_chat_bot .container-chat-options { position: relative; display: flex; background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.05)); border-radius: 20px; padding: 2px; overflow: hidden; }
-  .container_chat_bot .chat { display: flex; flex-direction: column; background-color: rgba(18, 18, 24, 0.95) !important; border: 1px solid rgba(255, 255, 255, 0.12) !important; border-radius: 18px; width: 100%; overflow: hidden; backdrop-filter: blur(12px); }
-  .container_chat_bot .chat input { background-color: rgba(255, 255, 255, 0.03) !important; border: none; border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important; width: 100%; color: #f8fafc !important; font-family: 'Inter', 'Cairo', sans-serif; font-size: 13px; font-weight: 600; padding: 12px 14px; outline: none; }
-  .container_chat_bot .chat input::placeholder { color: #94a3b8 !important; }
-  .container_chat_bot .chat .chat-bot textarea { background-color: rgba(255, 255, 255, 0.03) !important; border: none; width: 100%; height: 80px; color: #f8fafc !important; font-family: 'Inter', 'Cairo', sans-serif; font-size: 13px; font-weight: 500; padding: 12px 14px; resize: none; outline: none; }
-  .container_chat_bot .chat .chat-bot textarea::placeholder { color: #94a3b8 !important; }
-  .container_chat_bot .chat .options { display: flex; justify-content: flex-end; align-items: center; padding: 8px 12px; border-top: 1px solid rgba(255, 255, 255, 0.05); }
-  .container_chat_bot .chat .options .btn-submit { display: flex; padding: 2px; background: linear-gradient(135deg, #7e22ce, #a855f7); border-radius: 10px; cursor: pointer; border: none; }
-  .container_chat_bot .chat .options .btn-submit i { width: 34px; height: 32px; padding: 6px; background: rgba(0, 0, 0, 0.2); border-radius: 8px; color: #ffffff; display: flex; align-items: center; justify-content: center; }
-
-  html.light .container_chat_bot .chat { background-color: #ffffff !important; border: 1px solid #cbd5e1 !important; }
-  html.light .container_chat_bot .chat input { background-color: #f8fafc !important; color: #334155 !important; border-bottom: 1px solid #e2e8f0 !important; }
-  html.light .container_chat_bot .chat input::placeholder { color: #64748b !important; }
-  html.light .container_chat_bot .chat .chat-bot textarea { background-color: #f8fafc !important; color: #334155 !important; }
-  html.light .container_chat_bot .chat .chat-bot textarea::placeholder { color: #64748b !important; }
-
-  html.light .vortx-wet-oil-title { background: linear-gradient(110deg, #17131F 0%, #64748B 30%, #17131F 55%, #94A3B8 80%, #17131F 100%); background-size: 200% 100%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 4px 12px rgba(100, 116, 139, 0.15)); }
-  html.light .glass, html.light .cat-card-glass, html.light .tier-card { background: rgba(255, 255, 255, 0.85) !important; border: 1px solid rgba(203, 213, 225, 0.4) !important; box-shadow: 0 15px 35px -10px rgba(100, 116, 139, 0.08) !important; backdrop-filter: blur(24px) !important; }
+  html.light .vortx-wet-oil-title { background: linear-gradient(110deg, #0f172a 0%, #475569 30%, #0f172a 55%, #64748b 80%, #0f172a 100%); background-size: 200% 100%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 4px 12px rgba(15, 23, 42, 0.15)); }
 
   h1, h2, h3, .font-head { font-family: 'Cinzel', serif; letter-spacing: 1.5px; }
   .force-eng { font-family: 'Cinzel', serif !important; letter-spacing: 0.15em !important; direction: ltr !important; unicode-bidi: isolate-override !important; display: inline-block; }
   .stars-background-container { position: absolute; inset: 0; width: 100%; height: 100%; background: var(--star-bg); overflow: hidden; z-index: 0; pointer-events: none; transition: background .4s ease; }
   body > .stars-background-container { position: fixed; }
-  #hero-section { position: relative; min-height: 85vh; display: flex; flex-direction: column; justify-content: center; }
   
+  /* موضع الهيرو مع ضبط الكورة ورفع الشارة بالأعلى */
+  #hero-section { position: relative; min-height: 85vh; display: flex; flex-direction: column; justify-content: center; }
   #globe { position: absolute; top: 48%; left: 50%; transform: translate(-50%,-50%) scale(0); z-index: 1; opacity: 0; pointer-events: none; }
+  
+  @media (max-width: 640px) {
+    #globe { top: 62% !important; } /* تنزيل الكورة في الجوال عشان ما تضرب في الشارة أبداً */
+    .hero-badge-pill { transform: translateY(-16px); margin-bottom: 1.75rem !important; }
+  }
+
   .revealed #globe { animation: globeBounce 2.8s ease-in-out 0.1s both; }
   @keyframes globeBounce { 0% { opacity: 0; transform: translate(-50%,-50%) scale(0); } 45% { opacity: 1; transform: translate(-50%,-50%) scale(1.25); } 100% { opacity: 1; transform: translate(-50%,-50%) scale(1); } }
   .floor-glow { position: absolute; left: 50%; bottom: 6%; width: 60%; height: 220px; transform: translateX(-50%); background: radial-gradient(ellipse at center, rgba(255,255,255,.10), rgba(255,255,255,0) 70%); filter: blur(8px); z-index: 1; opacity: 0; pointer-events: none; animation: fadeGlow 3s ease 1.5s forwards; }
@@ -164,11 +178,14 @@
   @keyframes oilShineSweep { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
   
   .nav-btn-item { width: 38px; height: 38px; border-radius: 999px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.05); transition: all 0.3s ease; flex-shrink: 0; }
+  html.light .nav-btn-item { background: #ffffff; border-color: #cbd5e1; color: #0f172a; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
   .nav-btn-item:hover { background: rgba(255,255,255,0.12); transform: scale(1.05); }
+  html.light .nav-btn-item:hover { background: #f1f5f9; }
+
   .theme-switch-btn { width: 56px; height: 30px; border-radius: 999px; background: transparent; border: 1px solid rgba(255,255,255,0.2); position: relative; cursor: pointer; transition: all .4s ease; display: flex; align-items: center; flex-shrink: 0; }
-  html.light .theme-switch-btn { background: #ffffff; border-color: rgba(203, 213, 225, 0.4); box-shadow: inset 0 2px 10px rgba(100, 116, 139, 0.05); }
+  html.light .theme-switch-btn { background: #ffffff; border-color: #cbd5e1; box-shadow: inset 0 2px 8px rgba(0,0,0,0.05); }
   .theme-switch-ball { width: 22px; height: 22px; border-radius: 50%; position: absolute; left: 3px; background: rgba(255,255,255,0.15); color: white; transition: transform .4s cubic-bezier(0.25, 1, 0.5, 1); display: flex; align-items: center; justify-content: center; }
-  html.light .theme-switch-ball { transform: translateX(26px); background: #334155; color: #ffffff; }
+  html.light .theme-switch-ball { transform: translateX(26px); background: #0f172a; color: #ffffff; }
   .icon-moon { display: block; width: 12px; height: 12px; }
   .icon-sun { display: none; width: 13px; height: 13px; }
   html.light .icon-moon { display: none; }
@@ -178,7 +195,6 @@
   .perspective-container { perspective: 1350px; }
   .preserve-3d { transform-style: preserve-3d; }
 
-  /* الكروت مع تسريع العتاد للجوال */
   .card-3d { position: absolute; top: 50%; left: 50%; width: 280px; height: 440px; margin-top: -220px; margin-left: -140px; border-radius: 20px; transform-style: preserve-3d; will-change: transform, opacity; cursor: pointer; box-shadow: 0 30px 60px -12px rgba(0,0,0,0.85); overflow: hidden; background-size: cover !important; background-position: center !important; transition: transform 0.25s cubic-bezier(0.2, 0.9, 0.3, 1); touch-action: pan-y; }
   .card-3d:hover { box-shadow: 0 40px 80px -10px rgba(234, 179, 8, 0.3); }
   
@@ -213,75 +229,77 @@
   .glass-btn-center:hover { transform: translateY(-2px) scale(1.05); background: rgba(255, 255, 255, 0.3); }
 
   .back-btn-pill { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.6rem 1.4rem; border-radius: 999px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.2); backdrop-filter: blur(16px); color: #eab308; font-weight: 800; font-size: 0.9rem; cursor: pointer; transition: all 0.2s ease; }
+  html.light .back-btn-pill { background: #ffffff; border-color: #cbd5e1; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
   .back-btn-pill:hover { transform: scale(1.05); }
 
   /* ========================================================
-     تنسيقات باقات الويب الشاملة والفخمة (من الكود الأول)
+     تنسيقات باقات الويب الشاملة والفخمة مع علامات الصح البارزة
      ======================================================== */
   .vx-price-card { position: relative; display: flex; flex-direction: column; justify-content: space-between; padding: 1.5rem; width: 100%; border-radius: 1.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.2); z-index: 1; transition: transform .4s ease, box-shadow .4s ease; }
   .vx-price-card:hover { transform: translateY(-5px); }
 
-  .card__list { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.75rem; margin-bottom: 0.75rem; list-style: none; }
-  .card__list_item { display: flex; align-items: center; gap: 0.5rem; }
-  .check { width: 1.1rem; height: 1.1rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-  .check_svg { width: 0.75rem; height: 0.75rem; }
-  .list_text { font-size: 0.8rem; font-weight: 600; line-height: 1.25; }
+  .card__list { display: flex; flex-direction: column; gap: 0.55rem; margin-top: 0.75rem; margin-bottom: 0.75rem; list-style: none; }
+  .card__list_item { display: flex; align-items: center; gap: 0.6rem; }
+  
+  /* علامة الصح (Check) واضحة ولها إطار بارز */
+  .check { width: 1.25rem; height: 1.25rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .check_svg { width: 0.85rem; height: 0.85rem; }
+  .list_text { font-size: 0.82rem; font-weight: 700; line-height: 1.3; }
 
-  /* باقة STARTER: أبيض + بنفسجي هادئ */
+  /* باقة STARTER */
   .card-theme-starter {
     background: linear-gradient(135deg, #ffffff 0%, #f7f3ff 60%, #ede9fe 100%) !important;
-    border: 1px solid rgba(168, 85, 247, 0.4) !important;
-    box-shadow: 0 15px 35px rgba(168, 85, 247, 0.15) !important;
+    border: 2px solid rgba(168, 85, 247, 0.6) !important;
+    box-shadow: 0 15px 35px rgba(168, 85, 247, 0.18) !important;
     color: #1e1b4b !important;
   }
   .card-theme-starter .card_title { color: #581c87 !important; font-weight: 900; font-size: 1.25rem; }
   .card-theme-starter .card_price { color: #7e22ce !important; font-weight: 900; font-size: 1.75rem; }
-  .card-theme-starter .card_paragraph { color: #4c1d95 !important; font-size: 0.8rem; font-weight: 500; }
-  .card-theme-starter .line { background-color: rgba(168, 85, 247, 0.2) !important; margin: 0.5rem 0; border: none; height: 1px; }
+  .card-theme-starter .card_paragraph { color: #4c1d95 !important; font-size: 0.8rem; font-weight: 600; }
+  .card-theme-starter .line { background-color: rgba(168, 85, 247, 0.3) !important; margin: 0.5rem 0; border: none; height: 1.5px; }
   .card-theme-starter .list_text { color: #2e1065 !important; }
-  .card-theme-starter .check { background-color: rgba(168, 85, 247, 0.15) !important; border: 1px solid rgba(168, 85, 247, 0.3) !important; }
-  .card-theme-starter .check_svg { fill: #7e22ce !important; }
+  .card-theme-starter .check { background-color: #7e22ce !important; border: 1.5px solid #581c87 !important; }
+  .card-theme-starter .check_svg { fill: #ffffff !important; }
   .card-theme-starter .delivery_text { color: #7e22ce !important; font-weight: 800; font-size: 0.75rem; text-align: center; }
-  .card-theme-starter .glass-btn-center { background: rgba(126, 34, 206, 0.12) !important; border-color: rgba(126, 34, 206, 0.35) !important; color: #581c87 !important; }
-  .card-theme-starter .glass-btn-center:hover { background: rgba(126, 34, 206, 0.25) !important; color: #3b0764 !important; }
+  .card-theme-starter .glass-btn-center { background: #7e22ce !important; border-color: #581c87 !important; color: #ffffff !important; }
+  .card-theme-starter .glass-btn-center:hover { background: #6b21a8 !important; }
 
-  /* باقة PREMIUM: أبيض وأسود مع بني فاتح برونزي */
+  /* باقة PREMIUM */
   .card-theme-premium {
     background: linear-gradient(135deg, #09090b 0%, #18181b 50%, #27272a 100%) !important;
-    border: 1px solid rgba(217, 119, 6, 0.4) !important;
+    border: 2px solid rgba(217, 119, 6, 0.6) !important;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6) !important;
     color: #ffffff !important;
   }
   .card-theme-premium .card_title { color: #ffffff !important; font-weight: 900; font-size: 1.25rem; }
-  .card-theme-premium .card_price { color: #d97706 !important; font-weight: 900; font-size: 1.75rem; }
-  .card-theme-premium .card_paragraph { color: rgba(255, 255, 255, 0.8) !important; font-size: 0.8rem; font-weight: 500; }
-  .card-theme-premium .line { background-color: rgba(217, 119, 6, 0.25) !important; margin: 0.5rem 0; border: none; height: 1px; }
+  .card-theme-premium .card_price { color: #f59e0b !important; font-weight: 900; font-size: 1.75rem; }
+  .card-theme-premium .card_paragraph { color: rgba(255, 255, 255, 0.85) !important; font-size: 0.8rem; font-weight: 500; }
+  .card-theme-premium .line { background-color: rgba(217, 119, 6, 0.4) !important; margin: 0.5rem 0; border: none; height: 1.5px; }
   .card-theme-premium .list_text { color: #f4f4f5 !important; }
-  .card-theme-premium .check { background-color: rgba(217, 119, 6, 0.15) !important; border: 1px solid rgba(217, 119, 6, 0.4) !important; }
-  .card-theme-premium .check_svg { fill: #d97706 !important; }
-  .card-theme-premium .delivery_text { color: #d97706 !important; font-weight: 800; font-size: 0.75rem; text-align: center; }
-  .card-theme-premium .glass-btn-center { background: rgba(217, 119, 6, 0.15) !important; border-color: rgba(217, 119, 6, 0.4) !important; color: #fbbf24 !important; }
-  .card-theme-premium .glass-btn-center:hover { background: rgba(217, 119, 6, 0.3) !important; color: #ffffff !important; }
+  .card-theme-premium .check { background-color: #d97706 !important; border: 1.5px solid #b45309 !important; }
+  .card-theme-premium .check_svg { fill: #ffffff !important; }
+  .card-theme-premium .delivery_text { color: #fbbf24 !important; font-weight: 800; font-size: 0.75rem; text-align: center; }
+  .card-theme-premium .glass-btn-center { background: rgba(217, 119, 6, 0.3) !important; border-color: rgba(217, 119, 6, 0.6) !important; color: #fbbf24 !important; }
+  .card-theme-premium .glass-btn-center:hover { background: #d97706 !important; color: #ffffff !important; }
 
-  /* باقة ELITE: كحلي غامق مع ذهبي وفضي */
+  /* باقة ELITE */
   .card-theme-elite {
     background: linear-gradient(135deg, #020617 0%, #0f172a 50%, #1e293b 100%) !important;
-    border: 1px solid rgba(234, 179, 8, 0.45) !important;
+    border: 2px solid rgba(234, 179, 8, 0.6) !important;
     box-shadow: 0 15px 35px rgba(15, 23, 42, 0.7) !important;
     color: #f8fafc !important;
   }
-  .card-theme-elite .card_title { color: #e2e8f0 !important; font-weight: 900; font-size: 1.25rem; }
-  .card-theme-elite .card_price { color: #eab308 !important; font-weight: 900; font-size: 1.75rem; }
+  .card-theme-elite .card_title { color: #ffffff !important; font-weight: 900; font-size: 1.25rem; }
+  .card-theme-elite .card_price { color: #facc15 !important; font-weight: 900; font-size: 1.75rem; }
   .card-theme-elite .card_paragraph { color: #cbd5e1 !important; font-size: 0.8rem; font-weight: 500; }
-  .card-theme-elite .line { background-color: rgba(234, 179, 8, 0.25) !important; margin: 0.5rem 0; border: none; height: 1px; }
-  .card-theme-elite .list_text { color: #f1f5f9 !important; }
-  .card-theme-elite .check { background-color: rgba(234, 179, 8, 0.15) !important; border: 1px solid rgba(234, 179, 8, 0.4) !important; }
-  .card-theme-elite .check_svg { fill: #eab308 !important; }
-  .card-theme-elite .delivery_text { color: #eab308 !important; font-weight: 800; font-size: 0.75rem; text-align: center; }
-  .card-theme-elite .glass-btn-center { background: rgba(234, 179, 8, 0.15) !important; border-color: rgba(234, 179, 8, 0.4) !important; color: #fef08a !important; }
-  .card-theme-elite .glass-btn-center:hover { background: rgba(234, 179, 8, 0.3) !important; color: #ffffff !important; }
+  .card-theme-elite .line { background-color: rgba(234, 179, 8, 0.4) !important; margin: 0.5rem 0; border: none; height: 1.5px; }
+  .card-theme-elite .list_text { color: #f8fafc !important; }
+  .card-theme-elite .check { background-color: #eab308 !important; border: 1.5px solid #ca8a04 !important; }
+  .card-theme-elite .check_svg { fill: #000000 !important; }
+  .card-theme-elite .delivery_text { color: #facc15 !important; font-weight: 800; font-size: 0.75rem; text-align: center; }
+  .card-theme-elite .glass-btn-center { background: rgba(234, 179, 8, 0.25) !important; border-color: rgba(234, 179, 8, 0.6) !important; color: #fef08a !important; }
+  .card-theme-elite .glass-btn-center:hover { background: #eab308 !important; color: #000000 !important; }
 
-  /* إطار ومقاس الصور الثابت داخل الكرت */
   .tier-img-box {
     width: 100%;
     height: 160px;
@@ -292,9 +310,7 @@
     border: 1px solid rgba(255, 255, 255, 0.2);
     transition: transform 0.3s ease;
   }
-  .vx-price-card:hover .tier-img-box {
-    transform: scale(1.02);
-  }
+  .vx-price-card:hover .tier-img-box { transform: scale(1.02); }
 </style>
 </head>
 <body>
@@ -423,11 +439,13 @@
       <canvas id="globe"></canvas>
       <div class="floor-glow"></div>
 
-      <div class="relative z-20 flex flex-col items-center justify-center -mt-28 sm:-mt-16 pt-2 sm:pt-0 pb-28">
-        <div class="fade-up-item inline-flex items-center gap-3 px-7 py-2.5 rounded-full text-xs sm:text-sm font-black tracking-widest uppercase glass backdrop-blur-xl shadow-lg border border-white/20 text-white z-30 mb-6 sm:mb-6 mt-4 sm:mt-0">
-          <span class="w-2 h-2 rounded-full bg-white/70 animate-ping"></span>
+      <div class="relative z-20 flex flex-col items-center justify-center -mt-24 sm:-mt-16 pt-0 sm:pt-0 pb-28">
+        
+        <!-- شارة الهيرو مرفوعة بالأعلى ومفصولة تماماً عن موضع الكورة -->
+        <div class="hero-badge-pill fade-up-item inline-flex items-center gap-3 px-7 py-2.5 rounded-full text-xs sm:text-sm font-black tracking-widest uppercase glass backdrop-blur-xl shadow-lg border border-white/20 text-current z-30 mb-8 sm:mb-6">
+          <span class="w-2 h-2 rounded-full bg-yellow-400 animate-ping"></span>
           <span data-i18n="hero-tag">Digital Assets Hub</span>
-          <span class="w-2 h-2 rounded-full bg-white/70 animate-ping"></span>
+          <span class="w-2 h-2 rounded-full bg-yellow-400 animate-ping"></span>
         </div>
 
         <h1 class="animated-title font-black text-4xl sm:text-6xl md:text-7xl leading-tight mb-6">
@@ -446,7 +464,7 @@
         </div>
       </div>
 
-      <!-- روابط التواصل الاجتماعي بالهيرو: التليجرام هنا يودي لقناة الفورتكس الرسمية -->
+      <!-- روابط التواصل بالهيرو: التليجرام يفتح القناة الرسمية -->
       <div class="absolute bottom-2 sm:-bottom-8 md:-bottom-16 lg:-bottom-20 left-1/2 -translate-x-1/2 w-[90%] max-w-[520px] flex items-center justify-around px-6 sm:px-8 py-4 sm:py-5 rounded-full border border-white/10 glass backdrop-blur-md opacity-80 z-30" dir="rtl">
         <a href="https://www.tiktok.com/@v_ortx?_r=1&_t=ZS-98pGOR9h9Ca" target="_blank" rel="noopener noreferrer" title="TikTok" class="hover:scale-110 hover:opacity-100 transition-all text-current">
           <svg class="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
@@ -465,10 +483,19 @@
 
     <section id="bundles" class="max-w-7xl mx-auto px-4 sm:px-6 pt-20 sm:pt-28 md:pt-36 pb-12 reveal-on-scroll">
       <div class="relative w-full h-[360px] sm:h-[460px] rounded-3xl overflow-hidden shadow-2xl border border-white/10 group">
+        <!-- فيديو الباقات مع جميع خصائص الإجبار للتشغيل التلقائي فوراً -->
         <video 
+          id="vortx-bundle-video"
           src="https://res.cloudinary.com/eon6wcph/video/upload/v1/VORTX_4K_CLEAN_FULL_kd7uui.mp4" 
-          autoplay loop muted playsinline preload="auto"
-          class="w-full h-full object-cover" style="pointer-events: none;">
+          autoplay 
+          loop 
+          muted 
+          playsinline 
+          webkit-playsinline
+          x5-playsinline
+          preload="auto"
+          class="w-full h-full object-cover" 
+          style="pointer-events: none;">
         </video>
 
         <div class="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black/80 via-black/40 to-transparent pointer-events-none"></div>
@@ -485,7 +512,7 @@
       </div>
     </section>
 
-    <!-- الأزرار الرئيسية + الشريحة الفرعية للبرامج AM و AE -->
+    <!-- أزرار التبويبات الرئيسية (واضحة بالوضعين) -->
     <div class="w-full max-w-5xl mx-auto px-4 sm:px-6 relative z-40 mb-8 mt-6 reveal-on-scroll">
       <div class="glass-tab-container">
         <button type="button" onclick="window.activateCategoryCards('CC', this)" class="tab-btn active force-eng">CC</button>
@@ -515,25 +542,49 @@
       </div>
     </section>
 
+    <!-- الأقسام الرئيسية -->
     <section id="categories" class="max-w-7xl mx-auto px-4 sm:px-6 py-16 reveal-on-scroll">
-      <div class="mb-10 text-left"><h2 data-i18n="cat-sec-title" class="font-head font-bold text-3xl sm:text-4xl">Categories</h2><p data-i18n="cat-sec-desc" class="font-bold opacity-50 mt-2 text-sm tracking-wide">Select a category to explore editing packs in full page view.</p></div>
+      <div class="mb-10 text-left"><h2 data-i18n="cat-sec-title" class="font-head font-bold text-3xl sm:text-4xl">Categories</h2><p data-i18n="cat-sec-desc" class="font-bold opacity-60 mt-2 text-sm tracking-wide">Select a category to explore editing packs in full page view.</p></div>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div id="cat-card-CC" onclick="window.openCategoryView('CC')" class="cat-card-glass flex items-center justify-between group"><div class="flex items-center gap-5"><div class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-current font-extrabold text-sm">01</div><div><h3 class="font-head font-black text-2xl tracking-wider force-eng">CC</h3><p class="text-xs font-semibold opacity-60 mt-1" data-i18n="cat-cc-desc">Color Corrections</p></div></div><div class="opacity-60 text-xl font-bold">→</div></div>
-        <div id="cat-card-XML" onclick="window.openCategoryView('XML')" class="cat-card-glass flex items-center justify-between group"><div class="flex items-center gap-5"><div class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-current font-extrabold text-sm">02</div><div><h3 class="font-head font-black text-2xl tracking-wider force-eng">XML</h3><p class="text-xs font-semibold opacity-60 mt-1" data-i18n="cat-xml-desc">Project Files</p></div></div><div class="opacity-60 text-xl font-bold">→</div></div>
-        <div id="cat-card-SHAKE" onclick="window.openCategoryView('SHAKE')" class="cat-card-glass flex items-center justify-between group"><div class="flex items-center gap-5"><div class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-current font-extrabold text-sm">03</div><div><h3 class="font-head font-black text-2xl tracking-wider force-eng">SHAKE</h3><p class="text-xs font-semibold opacity-60 mt-1" data-i18n="cat-shake-desc">Camera Shake Presets</p></div></div><div class="opacity-60 text-xl font-bold">→</div></div>
-        <div id="cat-card-FREE" onclick="window.openCategoryView('FREE')" class="cat-card-glass flex items-center justify-between group"><div class="flex items-center gap-5"><div class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-current font-extrabold text-sm">04</div><div><h3 class="font-head font-black text-2xl tracking-wider force-eng">FREE</h3><p class="text-xs font-semibold opacity-60 mt-1" data-i18n="cat-free-desc">Free Sample Assets</p></div></div><div class="opacity-60 text-xl font-bold">→</div></div>
+        <div id="cat-card-CC" onclick="window.openCategoryView('CC')" class="cat-card-glass flex items-center justify-between group">
+          <div class="flex items-center gap-5">
+            <div class="cat-num-box w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-current font-extrabold text-sm">01</div>
+            <div><h3 class="font-head font-black text-2xl tracking-wider force-eng">CC</h3><p class="text-xs font-semibold opacity-70 mt-1" data-i18n="cat-cc-desc">Color Corrections</p></div>
+          </div>
+          <div class="opacity-60 text-xl font-bold group-hover:translate-x-1 transition-transform">→</div>
+        </div>
+        <div id="cat-card-XML" onclick="window.openCategoryView('XML')" class="cat-card-glass flex items-center justify-between group">
+          <div class="flex items-center gap-5">
+            <div class="cat-num-box w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-current font-extrabold text-sm">02</div>
+            <div><h3 class="font-head font-black text-2xl tracking-wider force-eng">XML</h3><p class="text-xs font-semibold opacity-70 mt-1" data-i18n="cat-xml-desc">Project Files</p></div>
+          </div>
+          <div class="opacity-60 text-xl font-bold group-hover:translate-x-1 transition-transform">→</div>
+        </div>
+        <div id="cat-card-SHAKE" onclick="window.openCategoryView('SHAKE')" class="cat-card-glass flex items-center justify-between group">
+          <div class="flex items-center gap-5">
+            <div class="cat-num-box w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-current font-extrabold text-sm">03</div>
+            <div><h3 class="font-head font-black text-2xl tracking-wider force-eng">SHAKE</h3><p class="text-xs font-semibold opacity-70 mt-1" data-i18n="cat-shake-desc">Camera Shake Presets</p></div>
+          </div>
+          <div class="opacity-60 text-xl font-bold group-hover:translate-x-1 transition-transform">→</div>
+        </div>
+        <div id="cat-card-FREE" onclick="window.openCategoryView('FREE')" class="cat-card-glass flex items-center justify-between group">
+          <div class="flex items-center gap-5">
+            <div class="cat-num-box w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-current font-extrabold text-sm">04</div>
+            <div><h3 class="font-head font-black text-2xl tracking-wider force-eng">FREE</h3><p class="text-xs font-semibold opacity-70 mt-1" data-i18n="cat-free-desc">Free Sample Assets</p></div>
+          </div>
+          <div class="opacity-60 text-xl font-bold group-hover:translate-x-1 transition-transform">→</div>
+        </div>
       </div>
     </section>
 
+    <!-- نظام التقييم الصافي بالنجوم فقط (بدون تعليقات أو كتابة) -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 py-12 border-t border-white/10 mt-12 reveal-on-scroll">
-      <div id="reviews-marquee-container" class="w-full mb-12 py-4 glass rounded-2xl hidden hide-scrollbar" dir="ltr" style="touch-action: pan-y;">
-        <div id="reviews-marquee-track" class="flex gap-6 items-center px-4 w-max" dir="ltr"></div>
-      </div>
+      
+      <div class="max-w-2xl mx-auto mb-10 p-6 sm:p-8 rounded-3xl glass text-center">
+        <h3 data-i18n="review-title" class="font-head font-bold text-2xl text-yellow-500 mb-2">Leave Your Rating</h3>
+        <p data-i18n="review-sub" class="text-xs opacity-70 mb-6 font-bold">Select your star rating for VORTX Studio</p>
 
-      <div class="max-w-4xl mx-auto mb-10 p-6 rounded-3xl glass border border-white/10 text-center">
-        <h3 data-i18n="review-title" class="font-head font-bold text-xl text-yellow-500 mb-2">Leave Your Review & Rating</h3>
-        <p data-i18n="review-sub" class="text-xs opacity-70 mb-6 font-bold">Share your experience with VORTX Studio</p>
-
+        <!-- نجوم التقييم -->
         <div class="radio">
           <input value="5" name="rating" type="radio" id="rating-5" />
           <label title="5 stars" for="rating-5"><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512"><path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"></path></svg></label>
@@ -547,50 +598,40 @@
           <label title="1 star" for="rating-1"><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512"><path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"></path></svg></label>
         </div>
 
-        <div class="container_chat_bot">
-          <div class="container-chat-options">
-            <div class="chat">
-              <input type="text" id="reviewer_name" placeholder="Your Name (Optional)...✦˚" data-i18n-ph="placeholder-name" />
-              <div class="chat-bot">
-                <textarea id="chat_bot" name="chat_bot" placeholder="Write your review here (Optional)...✦˚" data-i18n-ph="placeholder-comment"></textarea>
-              </div>
-              <div class="options">
-                <button class="btn-submit" type="button" onclick="window.submitUserRating()">
-                  <i>
-                    <svg viewBox="0 0 512 512" width="18" height="18"><path fill="currentColor" d="M473 39.05a24 24 0 0 0-25.5-5.46L47.47 185h-.08a24 24 0 0 0 1 45.16l.41.13l137.3 58.63a16 16 0 0 0 15.54-3.59L422 80a7.07 7.07 0 0 1 10 10L226.66 310.26a16 16 0 0 0-3.59 15.54l58.65 137.38c.06.2.12.38.19.57c3.2 9.27 11.3 15.81 21.09 16.25h1a24.63 24.63 0 0 0 23-15.46L478.39 64.62A24 24 0 0 0 473 39.05"></path></svg>
-                  </i>
-                </button>
-              </div>
-            </div>
-          </div>
+        <div class="flex justify-center mt-3">
+          <button type="button" onclick="window.submitUserRating()" class="glass-btn-center !px-8 !py-3 !text-sm font-black flex items-center gap-2 !m-0">
+            <span data-i18n="btn-submit-rating">Submit Rating</span>
+            <span class="text-yellow-400">★</span>
+          </button>
         </div>
       </div>
 
-      <div class="max-w-2xl mx-auto mb-10 p-6 rounded-3xl glass border border-yellow-500/20 text-left font-mono">
+      <!-- توزيع التقييمات الواقعي والحقيقي -->
+      <div class="max-w-2xl mx-auto mb-10 p-6 rounded-3xl glass font-mono">
         <h4 class="text-xs uppercase font-bold text-yellow-500 tracking-widest mb-4 text-center" data-i18n="rating-breakdown">RATING DISTRIBUTION</h4>
-        <div class="space-y-3.5 text-xs text-white">
-          <div class="flex items-center gap-3"><span class="w-10 text-yellow-400 font-bold shrink-0">5 ★</span><div class="flex-grow bg-white/10 rounded-full h-2.5 overflow-hidden"><div id="bar-5" class="bg-gradient-to-r from-yellow-600 to-amber-400 h-full rounded-full transition-all duration-700" style="width: 0%"></div></div><span id="pct-5" class="w-12 text-right font-bold opacity-80 shrink-0">0%</span></div>
-          <div class="flex items-center gap-3"><span class="w-10 text-yellow-400 font-bold shrink-0">4 ★</span><div class="flex-grow bg-white/10 rounded-full h-2.5 overflow-hidden"><div id="bar-4" class="bg-gradient-to-r from-yellow-600 to-amber-400 h-full rounded-full transition-all duration-700" style="width: 0%"></div></div><span id="pct-4" class="w-12 text-right font-bold opacity-80 shrink-0">0%</span></div>
-          <div class="flex items-center gap-3"><span class="w-10 text-yellow-400 font-bold shrink-0">3 ★</span><div class="flex-grow bg-white/10 rounded-full h-2.5 overflow-hidden"><div id="bar-3" class="bg-gradient-to-r from-yellow-600 to-amber-400 h-full rounded-full transition-all duration-700" style="width: 0%"></div></div><span id="pct-3" class="w-12 text-right font-bold opacity-80 shrink-0">0%</span></div>
-          <div class="flex items-center gap-3"><span class="w-10 text-yellow-400 font-bold shrink-0">2 ★</span><div class="flex-grow bg-white/10 rounded-full h-2.5 overflow-hidden"><div id="bar-2" class="bg-gradient-to-r from-yellow-600 to-amber-400 h-full rounded-full transition-all duration-700" style="width: 0%"></div></div><span id="pct-2" class="w-12 text-right font-bold opacity-80 shrink-0">0%</span></div>
-          <div class="flex items-center gap-3"><span class="w-10 text-yellow-400 font-bold shrink-0">1 ★</span><div class="flex-grow bg-white/10 rounded-full h-2.5 overflow-hidden"><div id="bar-1" class="bg-gradient-to-r from-yellow-600 to-amber-400 h-full rounded-full transition-all duration-700" style="width: 0%"></div></div><span id="pct-1" class="w-12 text-right font-bold opacity-80 shrink-0">0%</span></div>
+        <div class="space-y-3.5 text-xs text-current font-bold">
+          <div class="flex items-center gap-3"><span class="w-10 text-yellow-400 font-black shrink-0">5 ★</span><div class="flex-grow bg-slate-200 dark:bg-white/10 rounded-full h-2.5 overflow-hidden"><div id="bar-5" class="bg-gradient-to-r from-yellow-600 to-amber-400 h-full rounded-full transition-all duration-700" style="width: 0%"></div></div><span id="pct-5" class="w-12 text-right font-black opacity-80 shrink-0">0%</span></div>
+          <div class="flex items-center gap-3"><span class="w-10 text-yellow-400 font-black shrink-0">4 ★</span><div class="flex-grow bg-slate-200 dark:bg-white/10 rounded-full h-2.5 overflow-hidden"><div id="bar-4" class="bg-gradient-to-r from-yellow-600 to-amber-400 h-full rounded-full transition-all duration-700" style="width: 0%"></div></div><span id="pct-4" class="w-12 text-right font-black opacity-80 shrink-0">0%</span></div>
+          <div class="flex items-center gap-3"><span class="w-10 text-yellow-400 font-black shrink-0">3 ★</span><div class="flex-grow bg-slate-200 dark:bg-white/10 rounded-full h-2.5 overflow-hidden"><div id="bar-3" class="bg-gradient-to-r from-yellow-600 to-amber-400 h-full rounded-full transition-all duration-700" style="width: 0%"></div></div><span id="pct-3" class="w-12 text-right font-black opacity-80 shrink-0">0%</span></div>
+          <div class="flex items-center gap-3"><span class="w-10 text-yellow-400 font-black shrink-0">2 ★</span><div class="flex-grow bg-slate-200 dark:bg-white/10 rounded-full h-2.5 overflow-hidden"><div id="bar-2" class="bg-gradient-to-r from-yellow-600 to-amber-400 h-full rounded-full transition-all duration-700" style="width: 0%"></div></div><span id="pct-2" class="w-12 text-right font-black opacity-80 shrink-0">0%</span></div>
+          <div class="flex items-center gap-3"><span class="w-10 text-yellow-400 font-black shrink-0">1 ★</span><div class="flex-grow bg-slate-200 dark:bg-white/10 rounded-full h-2.5 overflow-hidden"><div id="bar-1" class="bg-gradient-to-r from-yellow-600 to-amber-400 h-full rounded-full transition-all duration-700" style="width: 0%"></div></div><span id="pct-1" class="w-12 text-right font-black opacity-80 shrink-0">0%</span></div>
         </div>
       </div>
 
       <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center mt-8">
-        <div class="glass p-6 rounded-2xl border border-white/10">
+        <div class="glass p-6 rounded-2xl">
           <h4 class="font-mono font-black text-3xl sm:text-4xl text-current tracking-wider"><span class="counter-num text-current" id="live-reviews-count" data-target="0">0</span></h4>
           <p data-i18n="stat-subscribers" class="text-xs font-bold opacity-70 mt-2 uppercase tracking-widest">Satisfied Clients</p>
         </div>
-        <div class="glass p-6 rounded-2xl border border-white/10">
+        <div class="glass p-6 rounded-2xl">
           <h4 class="font-mono font-black text-3xl sm:text-4xl text-current tracking-wider"><span class="counter-num text-current" id="live-views-count" data-target="0">0</span></h4>
           <p data-i18n="stat-views" class="text-xs font-bold opacity-70 mt-2 uppercase tracking-widest">Total Visits</p>
         </div>
-        <div class="glass p-6 rounded-2xl border border-white/10">
+        <div class="glass p-6 rounded-2xl">
           <h4 class="font-mono font-black text-3xl sm:text-4xl text-current tracking-wider">100%</h4>
           <p data-i18n="stat-orders" class="text-xs font-bold opacity-70 mt-2 uppercase tracking-widest">Quality Guarantee</p>
         </div>
-        <div class="glass p-6 rounded-2xl border border-white/10">
+        <div class="glass p-6 rounded-2xl">
           <h4 class="font-mono font-black text-3xl sm:text-4xl text-yellow-400 tracking-wider">★ <span class="counter-num-decimal text-current" id="live-rating-avg" data-target="0">0</span>/5</h4>
           <p data-i18n="stat-rating" class="text-xs font-extrabold text-yellow-400 mt-2 uppercase tracking-widest">Satisfaction Score</p>
         </div>
@@ -605,9 +646,7 @@
     </footer>
   </main>
 
-  <!-- ========================================================
-       صفحة باقات الويب الكاملة والمنسقة مع الصور والتحويل للتليجرام
-       ======================================================== -->
+  <!-- صفحة باقات الويب الكاملة والمنسقة مع الصور والتحويل للتليجرام الشخصي -->
   <section id="web-view" class="view view-hidden relative z-10 min-h-screen">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
       <div class="flex items-center justify-between mb-10">
@@ -631,7 +670,7 @@
               <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-s-f1">1 High-Converting Landing Page</span></li>
               <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-s-f2">Up to 4 Custom Sections</span></li>
               <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-s-f3">Fully Responsive & Mobile-Optimized</span></li>
-              <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-s-f4">Smooth Basic Animations</span></li>
+              <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-s-f4">Smooth Basic Animations</span></li>
               <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-s-f5">1 Revision Included</span></li>
             </ul>
           </div>
@@ -699,7 +738,7 @@
     </div>
   </section>
 
-  <!-- المعرض السفلي باللفتة الكاملة لحزم After Effects المضافة -->
+  <!-- المعرض الكامل لحزم After Effects و Light Motion -->
   <section id="category-view" class="view view-hidden relative z-10 min-h-screen">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
       <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6 pb-6 border-b border-white/10">
@@ -727,6 +766,34 @@
 </div>
 
 <script>
+  /* ========================================================
+     حل جذري لتشغيل الفيديو فوراً وبدون أي لاق أو تأخير
+     ======================================================== */
+  function forcePlayBundleVideo() {
+    const v = document.getElementById('vortx-bundle-video');
+    if (!v) return;
+    v.muted = true;
+    v.defaultMuted = true;
+    v.playsInline = true;
+    
+    const playPromise = v.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(function() {
+        // إذا اعترض متصفح الجوال التشغيل التلقائي الأول، يشتغل مع أول لمسة أو حركة للشاشة فوراً
+        const startOnUserTouch = function() {
+          v.muted = true;
+          v.play();
+          ['touchstart', 'touchend', 'click', 'scroll', 'pointerdown'].forEach(function(evt) {
+            window.removeEventListener(evt, startOnUserTouch);
+          });
+        };
+        ['touchstart', 'touchend', 'click', 'scroll', 'pointerdown'].forEach(function(evt) {
+          window.addEventListener(evt, startOnUserTouch, { once: true, passive: true });
+        });
+      });
+    }
+  }
+
   function runVxLoader() {
     window.scrollTo(0, 0);
     const logoWord = document.getElementById('vx-logo-word');
@@ -768,6 +835,7 @@
           if (heroSection) heroSection.classList.add('revealed');
           document.body.classList.add('revealed');
           window.scrollTo(0, 0);
+          forcePlayBundleVideo(); // تشغيل الفيديو فور انتهاء اللودر
         }, 200);
       }
     }
@@ -775,9 +843,13 @@
     requestAnimationFrame(animateLoader);
   }
 
-  window.addEventListener('DOMContentLoaded', runVxLoader);
+  window.addEventListener('DOMContentLoaded', function() {
+    runVxLoader();
+    forcePlayBundleVideo();
+  });
+  window.addEventListener('load', forcePlayBundleVideo);
 
-  /* دالة طلب الباقات: تحوّل لحسابك الشخصي في التليجرام مع رسالة جاهزة */
+  /* دالة طلب الباقات: تحول لحسابك الشخصي wot_5 مباشرة */
   window.openTelegramOrder = function(planName, price) {
     const telegramUsername = 'wot_5'; 
     const message = `Hey VORTX! I want to purchase the ${planName} package ($${price}).`;
@@ -871,6 +943,7 @@
       webView.classList.remove('view-hidden');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
+    forcePlayBundleVideo();
   };
 
   window.openCategoryView = function(catKey) {
@@ -902,7 +975,7 @@
     catGrid.innerHTML = products.map(p => {
       const swLabel = (p.sw === 'AE') ? '💻 PC' : '📱 MOBILE';
       return `
-        <div class="glass p-5 rounded-2xl border border-white/10 flex flex-col justify-between hover:border-yellow-500/40 transition-all duration-300 group">
+        <div class="glass p-5 rounded-2xl border flex flex-col justify-between hover:border-yellow-500/40 transition-all duration-300 group">
           <div>
             ${p.img ? `
               <div onclick="window.openPreview('${p.title}', '${p.tag}', ${p.price}, 'url(\\'${p.img}\\')', '', '${p.link}', '${p.sw}')" class="aspect-[9/16] w-full rounded-xl border border-white/10 p-4 flex flex-col justify-between mb-4 relative overflow-hidden bg-cover bg-center shadow-lg cursor-pointer transform transition-transform duration-300 hover:scale-[1.03]" style="background-image: url('${p.img}');">
@@ -923,12 +996,12 @@
                 </div>
               </div>
             `}
-            <h4 class="font-head font-black text-xl text-white group-hover:text-yellow-400 transition drop-shadow-md mb-2">${p.title}</h4>
+            <h4 class="font-head font-black text-xl text-current group-hover:text-yellow-500 transition drop-shadow-md mb-2">${p.title}</h4>
           </div>
-          <div class="pt-3 border-t border-white/10 flex items-center justify-between mt-4">
-            <span class="font-mono text-xl font-black text-yellow-400 font-bold">${p.price === 0 ? 'FREE' : '$' + p.price}</span>
+          <div class="pt-3 border-t border-slate-200 dark:border-white/10 flex items-center justify-between mt-4">
+            <span class="font-mono text-xl font-black text-yellow-500 font-bold">${p.price === 0 ? 'FREE' : '$' + p.price}</span>
             <div class="flex gap-2">
-              <button onclick="window.toggleFavorite('${p.id}', '${p.title}', '${p.tag}', ${p.price}, '${p.img}', '${p.link}', '${p.sw}')" class="px-3 py-1.5 rounded-xl bg-white/10 hover:bg-red-500/80 text-red-400 hover:text-white font-bold text-xs transition">${favText}</button>
+              <button onclick="window.toggleFavorite('${p.id}', '${p.title}', '${p.tag}', ${p.price}, '${p.img}', '${p.link}', '${p.sw}')" class="px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-white/10 hover:bg-red-500/80 text-red-500 hover:text-white font-bold text-xs transition border border-slate-200 dark:border-white/10">${favText}</button>
               <button type="button" onclick="window.openPayhipOrder('${p.link}')" class="glass-btn-center !px-4 !py-1.5 !min-w-0">
                 <span>${buyText}</span>
               </button>
@@ -958,8 +1031,6 @@
     if (window.supabase) {
       supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
     }
-
-    const BAD_WORDS = ['bad', 'worst', 'scam', 'fake', 'terrible', 'trash', 'slow', 'horrible', 'cheat', 'crap', 'سيء', 'سيئ', 'فاشل', 'نصاب', 'احتيال', 'خايس', 'زبالة', 'بطيء', 'ضعيف', 'نصب', 'حرامي', 'احذر', 'سرقة'];
 
     let favItems = JSON.parse(localStorage.getItem('vortx_favorites') || '[]');
 
@@ -995,12 +1066,12 @@
     function renderFavoritesUI() {
       const list = document.getElementById('favorites-list');
       if (!list) return;
-      if (favItems.length === 0) { list.innerHTML = `<p class="text-xs text-white/50 text-center py-8 sm:col-span-2">No favorite items saved yet.</p>`; return; }
+      if (favItems.length === 0) { list.innerHTML = `<p class="text-xs text-current opacity-50 text-center py-8 sm:col-span-2">No favorite items saved yet.</p>`; return; }
       
       const buyText = (window.translations && window.translations[window.currentLang] && window.translations[window.currentLang]["buy-now"]) || "Buy Now";
 
       list.innerHTML = favItems.map(item => `
-        <div class="p-3 bg-white/5 rounded-2xl border border-white/10 flex flex-col justify-between gap-3 shadow-lg hover:border-yellow-500/40 transition group">
+        <div class="p-3 bg-white/5 rounded-2xl border border-slate-200 dark:border-white/10 flex flex-col justify-between gap-3 shadow-lg hover:border-yellow-500/40 transition group">
           <div class="relative w-full aspect-[9/12] rounded-xl overflow-hidden bg-cover bg-center border border-white/10" style="${item.img ? `background-image: url('${item.img}');` : 'background: linear-gradient(135deg, #1e1b4b, #09090d);'}">
             <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30"></div>
             <span class="absolute top-2 left-2 text-[9px] font-black uppercase tracking-widest text-yellow-300 bg-black/80 px-2.5 py-0.5 rounded-full border border-white/10">${item.tag || 'CC PACK'}</span>
@@ -1010,7 +1081,7 @@
               <span class="text-xs text-yellow-400 font-mono font-black">${item.price === 0 ? 'FREE' : '$' + item.price}</span>
             </div>
           </div>
-          <div class="flex items-center gap-2 pt-1 border-t border-white/10">
+          <div class="flex items-center gap-2 pt-1 border-t border-slate-200 dark:border-white/10">
             <button onclick="window.openPayhipOrder('${item.link}')" class="glass-btn-center !w-full !py-2 !min-w-0 text-xs">
               <span>${buyText}</span>
             </button>
@@ -1036,39 +1107,32 @@
       setTimeout(function () { if (toast && toast.parentNode) toast.parentNode.removeChild(toast); }, 3000);
     };
 
+    /* إرسال التقييم بالنجوم فقط وبشكل حقيقي مع Supabase و LocalStorage */
     window.submitUserRating = async function() {
       const ratingRadio = document.querySelector('input[name="rating"]:checked');
       if (!ratingRadio) { window.showToast('PLEASE SELECT A STAR RATING FIRST!'); return; }
       
       const selectedScore = parseInt(ratingRadio.value, 10);
-      const commentEl = document.getElementById('chat_bot');
-      const nameEl = document.getElementById('reviewer_name');
-      const comment = commentEl ? commentEl.value.trim() : '';
-      const name = nameEl ? nameEl.value.trim() : '';
-
-      if (comment && BAD_WORDS.some(word => comment.toLowerCase().includes(word))) { window.showToast('REVIEW REJECTED: INAPPROPRIATE CONTENT!'); return; }
-
       window.showToast('SUBMITTING YOUR RATING...');
-      const newId = 'rev_' + Date.now() + '_' + Math.random().toString(36).substr(2, 7);
-      const newReview = { id: newId, rating: selectedScore, comment: comment, reviewer_name: name, created_at: new Date().toISOString() };
+      
+      const newReview = { 
+        id: 'rev_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6), 
+        rating: selectedScore, 
+        created_at: new Date().toISOString() 
+      };
 
       let localReviews = JSON.parse(localStorage.getItem('vortx_reviews_data') || '[]');
-      if (!localReviews.some(r => r.comment === comment && r.reviewer_name === name)) {
-        localReviews.unshift(newReview);
-        localStorage.setItem('vortx_reviews_data', JSON.stringify(localReviews));
-      }
+      localReviews.unshift(newReview);
+      localStorage.setItem('vortx_reviews_data', JSON.stringify(localReviews));
 
       if (supabase) {
         try {
-          let payload = { rating: selectedScore, comment: comment };
-          if (name) payload.reviewer_name = name;
-          await supabase.from('reviews').insert([payload]);
+          await supabase.from('reviews').insert([{ rating: selectedScore }]);
         } catch(e) {}
       }
 
-      if (commentEl) commentEl.value = ''; if (nameEl) nameEl.value = '';
       ratingRadio.checked = false;
-      window.showToast('RATING SUBMITTED SUCCESSFULLY!');
+      window.showToast('RATING SUBMITTED SUCCESSFULLY! ★★★★★');
       fetchLiveStats();
     };
 
@@ -1088,30 +1152,18 @@
       const viewsEl = document.getElementById('live-views-count');
       if (viewsEl) { viewsEl.setAttribute('data-target', localVisits); viewsEl.textContent = localVisits.toLocaleString('en-US'); }
 
-      let uniqueMap = new Map();
-      localReviews.forEach(r => { 
-        const key = `${r.comment}_${r.rating}_${r.reviewer_name}`;
-        if (!uniqueMap.has(key)) uniqueMap.set(key, r); 
-      });
-
       if (supabase) {
         try {
-          const { data } = await supabase.from('reviews').select('*').order('created_at', { ascending: false });
+          const { data } = await supabase.from('reviews').select('rating, created_at').order('created_at', { ascending: false });
           if (data && data.length > 0) {
-            data.forEach(dbr => {
-              const key = `${dbr.comment}_${dbr.rating}_${dbr.reviewer_name}`;
-              if (!uniqueMap.has(key)) uniqueMap.set(key, dbr);
-            });
+            localReviews = data;
           }
         } catch(e) {}
       }
 
-      let allReviews = Array.from(uniqueMap.values());
-      allReviews.sort((a,b) => new Date(b.created_at) - new Date(a.created_at));
-
-      if (allReviews.length > 0) {
-        const totalReviews = allReviews.length;
-        const totalScore = allReviews.reduce((sum, r) => sum + Number(r.rating || 0), 0);
+      if (localReviews.length > 0) {
+        const totalReviews = localReviews.length;
+        const totalScore = localReviews.reduce((sum, r) => sum + Number(r.rating || 5), 0);
         const rawAvg = totalScore / totalReviews;
         const displayScore = (rawAvg % 1 === 0) ? rawAvg.toFixed(0) : rawAvg.toFixed(1);
         
@@ -1121,38 +1173,12 @@
         if (countEl) { countEl.setAttribute('data-target', totalReviews); countEl.textContent = totalReviews.toLocaleString('en-US'); }
 
         const counts = { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0 };
-        allReviews.forEach(r => { const score = Math.min(5, Math.max(1, Number(r.rating || 5))); counts[score] = (counts[score] || 0) + 1; });
+        localReviews.forEach(r => { const score = Math.min(5, Math.max(1, Number(r.rating || 5))); counts[score] = (counts[score] || 0) + 1; });
         [5, 4, 3, 2, 1].forEach(star => {
           const pct = Math.round((counts[star] / totalReviews) * 100) || 0;
           const barEl = document.getElementById(`bar-${star}`); const pctEl = document.getElementById(`pct-${star}`);
           if (barEl) barEl.style.width = pct + '%'; if (pctEl) pctEl.textContent = pct + '%';
         });
-
-        const commentsOnly = allReviews.filter(r => r.comment && r.comment.trim().length > 0);
-        const marqueeContainer = document.getElementById('reviews-marquee-container');
-        const marqueeTrack = document.getElementById('reviews-marquee-track');
-
-        if (marqueeContainer && marqueeTrack) {
-          if (commentsOnly.length > 0) {
-            const cardsHtmlArr = commentsOnly.map(r => {
-              const starsHtml = '★'.repeat(Number(r.rating || 5));
-              const nameText = r.reviewer_name ? r.reviewer_name : 'Anonymous';
-              return `<div class="review-card-item px-5 py-3 rounded-2xl flex flex-col justify-center items-start gap-1 shrink-0 shadow-lg min-w-[200px] text-left"><span class="review-author text-xs text-yellow-400 font-bold block text-left">${nameText}</span><span class="text-yellow-400 font-bold text-xs tracking-widest block text-left">${starsHtml}</span><span class="review-comment-text text-xs text-white/90 font-medium block mt-1 text-left">"${r.comment}"</span></div>`;
-            });
-
-            let fullCards = cardsHtmlArr.join('');
-            if (cardsHtmlArr.length < 10) {
-              fullCards = cardsHtmlArr.join('') + cardsHtmlArr.join('') + cardsHtmlArr.join('') + cardsHtmlArr.join('');
-            } else {
-              fullCards = cardsHtmlArr.join('') + cardsHtmlArr.join('');
-            }
-
-            marqueeTrack.innerHTML = fullCards;
-            marqueeContainer.classList.remove('hidden');
-          } else {
-            marqueeContainer.classList.add('hidden');
-          }
-        }
       }
     }
 
@@ -1197,8 +1223,7 @@
         "buy-now": "Buy Now", "fav": "♥ Favorite", "notifications-title": "Notifications", "favorites-title": "Your Favorites",
         "cat-view-sub": "CATEGORY STORE", "cat-view-desc": "Explore all premium editing assets and bundles in this collection.", "preview-desc": "Includes full 4K vertical preset assets, color grade curves, and instant Payhip download integration.",
         "stat-subscribers": "Satisfied Clients", "stat-views": "Total Visits", "stat-orders": "Quality Guarantee", "stat-rating": "Satisfaction Score", 
-        "review-title": "Leave Your Review & Rating", "review-sub": "Share your experience with VORTX Studio", "rating-breakdown": "RATING DISTRIBUTION", 
-        "placeholder-name": "Your Name (Optional)...✦˚", "placeholder-comment": "Write your review here (Optional)...✦˚",
+        "review-title": "Leave Your Rating", "review-sub": "Select your star rating for VORTX Studio", "rating-breakdown": "RATING DISTRIBUTION", "btn-submit-rating": "Submit Rating",
         "select-plan": "Buy Now",
         "plan-s-title": "STARTER", "plan-s-price": "$150", "plan-s-f1": "1 High-Converting Landing Page", "plan-s-f2": "Up to 4 Custom Sections", "plan-s-f3": "Fully Responsive & Mobile-Optimized", "plan-s-f4": "Smooth Basic Animations", "plan-s-f5": "1 Revision Included", "plan-s-del": "Delivery: 7 Days",
         "plan-p-title": "PREMIUM", "plan-p-price": "$300", "plan-p-f1": "Up to 3 Custom Web Pages", "plan-p-f2": "Up to 8 Designed Sections", "plan-p-f3": "Advanced UI/UX & Interactions", "plan-p-f4": "Social Media & Channel Integration", "plan-p-f5": "3 Revisions Included", "plan-p-del": "Delivery: 7–12 Days",
@@ -1218,8 +1243,7 @@
         "buy-now": "شراء الآن", "fav": "♥ المفضلة", "notifications-title": "الإشعارات", "favorites-title": "المفضلة لديك",
         "cat-view-sub": "متجر الأقسام", "cat-view-desc": "استكشف جميع حزم وأصول التعديل الاحترافية في هذه المجموعة.", "preview-desc": "يشمل ملفات 4K عمودية، منحنيات الألوان، وتحميل مباشر عبر Payhip.",
         "stat-subscribers": "عملاء راضون", "stat-views": "إجمالي الزيارات", "stat-orders": "ضمان الجودة", "stat-rating": "معدل التقييم", 
-        "review-title": "اترك تقييمك ورأيك", "review-sub": "شاركونا تجربتكم مع فورتكس ستوديو", "rating-breakdown": "توزيع التقييمات", 
-        "placeholder-name": "اسمك (اختياري)...✦˚", "placeholder-comment": "اكتب تعليقك هنا (اختياري)...✦˚",
+        "review-title": "اترك تقييمك", "review-sub": "اختر تقييمك بالنجوم لفورتكس ستوديو", "rating-breakdown": "توزيع التقييمات", "btn-submit-rating": "إرسال التقييم",
         "select-plan": "شراء الآن",
         "plan-s-title": "البداية", "plan-s-price": "150$", "plan-s-f1": "صفحة هبوط احترافية عالي التحويل", "plan-s-f2": "حتى 4 أقسام مخصصة", "plan-s-f3": "متوافق بالكامل مع الجوال والشاشات", "plan-s-f4": "تحريكات أساسية سلسة", "plan-s-f5": "تعديل واحد مشمول", "plan-s-del": "التسليم: 7 أيام",
         "plan-p-title": "المميزة", "plan-p-price": "300$", "plan-p-f1": "حتى 3 صفحات ويب مخصصة", "plan-p-f2": "حتى 8 أقسام مصممة", "plan-p-f3": "واجهة وتفاعلات متقدمة", "plan-p-f4": "ربط شبكات التواصل والقنوات", "plan-p-f5": "3 تعديلات مشمولة", "plan-p-del": "التسليم: 7-12 يوم",
@@ -1234,7 +1258,6 @@
       if (badgeText) badgeText.textContent = window.currentLang === 'en' ? 'AR' : 'EN';
       var dict = window.translations[window.currentLang] || {};
       document.querySelectorAll('[data-i18n]').forEach(el => { if (dict[el.getAttribute('data-i18n')]) el.textContent = dict[el.getAttribute('data-i18n')]; });
-      document.querySelectorAll('[data-i18n-ph]').forEach(el => { if (dict[el.getAttribute('data-i18n-ph')]) el.setAttribute('placeholder', dict[el.getAttribute('data-i18n-ph')]); });
       
       renderFavoritesUI();
       const catView = document.getElementById('category-view');
@@ -1279,7 +1302,6 @@ document.addEventListener('DOMContentLoaded', function() {
   window.CURRENT_CAT = 'CC';
   window.CURRENT_SW = 'AM';
 
-  /* قاعدة البيانات الكاملة لحزم After Effects مع القلوب والروابط المحددة */
   window.DATA_STORE = {
     'CC': {
       'AM': [
@@ -1338,7 +1360,6 @@ document.addEventListener('DOMContentLoaded', function() {
   var cards = [], N = window.CARDS_DATA_CURRENT.length, currentIndex = 0, targetIndex = 0;
   var isDragging = false, isHorizontalDrag = false, startX = 0, startY = 0, currentX = 0, currentY = 0, dragDeltaX = 0, velocityX = 0, lastX = 0, lastTime = 0;
 
-  /* تقنية اللمس المباشر والسريع جداً للجوال بضغطة واحدة */
   window.rebuild3DCards = function() {
     track.innerHTML = ''; cards = []; N = window.CARDS_DATA_CURRENT.length; currentIndex = 0; targetIndex = 0;
     window.CARDS_DATA_CURRENT.forEach(function (data, i) {
@@ -1408,7 +1429,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   };
 
-  /* تسريع تحريك العرض ثلاثي الأبعاد لجعل اللف خفيفاً وبدون لاق */
   function updateTransform() {
     var spacing = 210;
     cards.forEach(function (card, i) {
