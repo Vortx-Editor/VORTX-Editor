@@ -208,12 +208,93 @@
   .vx-bar-fill { height: 100%; width: 0%; border-radius: 999px; background: linear-gradient(90deg, #555, #ccc, #fff); transition: width 0.1s linear; }
 
   .glass-btn-center {
-    display: inline-flex; align-items: center; justify-content: center; width: auto; min-width: 120px; padding: 0.55rem 1.4rem; margin: 0 auto; border-radius: 999px; background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.25); backdrop-filter: blur(12px); color: #ffffff !important; font-weight: 800; font-size: 0.85rem; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    display: inline-flex; align-items: center; justify-content: center; width: auto; min-width: 140px; padding: 0.55rem 1.4rem; margin: 0.5rem auto 0 auto; border-radius: 999px; background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.25); backdrop-filter: blur(12px); color: #ffffff !important; font-weight: 800; font-size: 0.85rem; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
   }
   .glass-btn-center:hover { transform: translateY(-2px) scale(1.05); background: rgba(255, 255, 255, 0.3); }
 
   .back-btn-pill { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.6rem 1.4rem; border-radius: 999px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.2); backdrop-filter: blur(16px); color: #eab308; font-weight: 800; font-size: 0.9rem; cursor: pointer; transition: all 0.2s ease; }
   .back-btn-pill:hover { transform: scale(1.05); }
+
+  /* ========================================================
+     تنسيقات باقات الويب الشاملة والفخمة (من الكود الأول)
+     ======================================================== */
+  .vx-price-card { position: relative; display: flex; flex-direction: column; justify-content: space-between; padding: 1.5rem; width: 100%; border-radius: 1.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.2); z-index: 1; transition: transform .4s ease, box-shadow .4s ease; }
+  .vx-price-card:hover { transform: translateY(-5px); }
+
+  .card__list { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.75rem; margin-bottom: 0.75rem; list-style: none; }
+  .card__list_item { display: flex; align-items: center; gap: 0.5rem; }
+  .check { width: 1.1rem; height: 1.1rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .check_svg { width: 0.75rem; height: 0.75rem; }
+  .list_text { font-size: 0.8rem; font-weight: 600; line-height: 1.25; }
+
+  /* باقة STARTER: أبيض + بنفسجي هادئ */
+  .card-theme-starter {
+    background: linear-gradient(135deg, #ffffff 0%, #f7f3ff 60%, #ede9fe 100%) !important;
+    border: 1px solid rgba(168, 85, 247, 0.4) !important;
+    box-shadow: 0 15px 35px rgba(168, 85, 247, 0.15) !important;
+    color: #1e1b4b !important;
+  }
+  .card-theme-starter .card_title { color: #581c87 !important; font-weight: 900; font-size: 1.25rem; }
+  .card-theme-starter .card_price { color: #7e22ce !important; font-weight: 900; font-size: 1.75rem; }
+  .card-theme-starter .card_paragraph { color: #4c1d95 !important; font-size: 0.8rem; font-weight: 500; }
+  .card-theme-starter .line { background-color: rgba(168, 85, 247, 0.2) !important; margin: 0.5rem 0; border: none; height: 1px; }
+  .card-theme-starter .list_text { color: #2e1065 !important; }
+  .card-theme-starter .check { background-color: rgba(168, 85, 247, 0.15) !important; border: 1px solid rgba(168, 85, 247, 0.3) !important; }
+  .card-theme-starter .check_svg { fill: #7e22ce !important; }
+  .card-theme-starter .delivery_text { color: #7e22ce !important; font-weight: 800; font-size: 0.75rem; text-align: center; }
+  .card-theme-starter .glass-btn-center { background: rgba(126, 34, 206, 0.12) !important; border-color: rgba(126, 34, 206, 0.35) !important; color: #581c87 !important; }
+  .card-theme-starter .glass-btn-center:hover { background: rgba(126, 34, 206, 0.25) !important; color: #3b0764 !important; }
+
+  /* باقة PREMIUM: أبيض وأسود مع بني فاتح برونزي */
+  .card-theme-premium {
+    background: linear-gradient(135deg, #09090b 0%, #18181b 50%, #27272a 100%) !important;
+    border: 1px solid rgba(217, 119, 6, 0.4) !important;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6) !important;
+    color: #ffffff !important;
+  }
+  .card-theme-premium .card_title { color: #ffffff !important; font-weight: 900; font-size: 1.25rem; }
+  .card-theme-premium .card_price { color: #d97706 !important; font-weight: 900; font-size: 1.75rem; }
+  .card-theme-premium .card_paragraph { color: rgba(255, 255, 255, 0.8) !important; font-size: 0.8rem; font-weight: 500; }
+  .card-theme-premium .line { background-color: rgba(217, 119, 6, 0.25) !important; margin: 0.5rem 0; border: none; height: 1px; }
+  .card-theme-premium .list_text { color: #f4f4f5 !important; }
+  .card-theme-premium .check { background-color: rgba(217, 119, 6, 0.15) !important; border: 1px solid rgba(217, 119, 6, 0.4) !important; }
+  .card-theme-premium .check_svg { fill: #d97706 !important; }
+  .card-theme-premium .delivery_text { color: #d97706 !important; font-weight: 800; font-size: 0.75rem; text-align: center; }
+  .card-theme-premium .glass-btn-center { background: rgba(217, 119, 6, 0.15) !important; border-color: rgba(217, 119, 6, 0.4) !important; color: #fbbf24 !important; }
+  .card-theme-premium .glass-btn-center:hover { background: rgba(217, 119, 6, 0.3) !important; color: #ffffff !important; }
+
+  /* باقة ELITE: كحلي غامق مع ذهبي وفضي */
+  .card-theme-elite {
+    background: linear-gradient(135deg, #020617 0%, #0f172a 50%, #1e293b 100%) !important;
+    border: 1px solid rgba(234, 179, 8, 0.45) !important;
+    box-shadow: 0 15px 35px rgba(15, 23, 42, 0.7) !important;
+    color: #f8fafc !important;
+  }
+  .card-theme-elite .card_title { color: #e2e8f0 !important; font-weight: 900; font-size: 1.25rem; }
+  .card-theme-elite .card_price { color: #eab308 !important; font-weight: 900; font-size: 1.75rem; }
+  .card-theme-elite .card_paragraph { color: #cbd5e1 !important; font-size: 0.8rem; font-weight: 500; }
+  .card-theme-elite .line { background-color: rgba(234, 179, 8, 0.25) !important; margin: 0.5rem 0; border: none; height: 1px; }
+  .card-theme-elite .list_text { color: #f1f5f9 !important; }
+  .card-theme-elite .check { background-color: rgba(234, 179, 8, 0.15) !important; border: 1px solid rgba(234, 179, 8, 0.4) !important; }
+  .card-theme-elite .check_svg { fill: #eab308 !important; }
+  .card-theme-elite .delivery_text { color: #eab308 !important; font-weight: 800; font-size: 0.75rem; text-align: center; }
+  .card-theme-elite .glass-btn-center { background: rgba(234, 179, 8, 0.15) !important; border-color: rgba(234, 179, 8, 0.4) !important; color: #fef08a !important; }
+  .card-theme-elite .glass-btn-center:hover { background: rgba(234, 179, 8, 0.3) !important; color: #ffffff !important; }
+
+  /* إطار ومقاس الصور الثابت داخل الكرت */
+  .tier-img-box {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 1rem;
+    margin-bottom: 0.75rem;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: transform 0.3s ease;
+  }
+  .vx-price-card:hover .tier-img-box {
+    transform: scale(1.02);
+  }
 </style>
 </head>
 <body>
@@ -365,6 +446,7 @@
         </div>
       </div>
 
+      <!-- روابط التواصل الاجتماعي بالهيرو: التليجرام هنا يودي لقناة الفورتكس الرسمية -->
       <div class="absolute bottom-2 sm:-bottom-8 md:-bottom-16 lg:-bottom-20 left-1/2 -translate-x-1/2 w-[90%] max-w-[520px] flex items-center justify-around px-6 sm:px-8 py-4 sm:py-5 rounded-full border border-white/10 glass backdrop-blur-md opacity-80 z-30" dir="rtl">
         <a href="https://www.tiktok.com/@v_ortx?_r=1&_t=ZS-98pGOR9h9Ca" target="_blank" rel="noopener noreferrer" title="TikTok" class="hover:scale-110 hover:opacity-100 transition-all text-current">
           <svg class="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
@@ -372,7 +454,7 @@
         <a href="https://youtube.com/@v_ort_x?si=I0yNjdp3twt2Y32U" target="_blank" rel="noopener noreferrer" title="YouTube" class="hover:scale-110 hover:opacity-100 transition-all text-current">
           <svg class="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="4"/><path d="m10 9 5 3-5 3z"/></svg>
         </a>
-        <a href="https://t.me/wot_5" target="_blank" rel="noopener noreferrer" title="Telegram Personal" class="hover:scale-110 hover:opacity-100 transition-all text-current">
+        <a href="https://t.me/v_ortx" target="_blank" rel="noopener noreferrer" title="Telegram Channel" class="hover:scale-110 hover:opacity-100 transition-all text-current">
           <svg class="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 10-4 4 6 6 4-16-18 7 4 2 2 6 3-4"/></svg>
         </a>
         <a href="https://www.instagram.com/toix.8i?igsh=Z3B1eWdwNGJocW9q" target="_blank" rel="noopener noreferrer" title="Instagram" class="hover:scale-110 hover:opacity-100 transition-all text-current">
@@ -442,8 +524,8 @@
         <div id="cat-card-FREE" onclick="window.openCategoryView('FREE')" class="cat-card-glass flex items-center justify-between group"><div class="flex items-center gap-5"><div class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-current font-extrabold text-sm">04</div><div><h3 class="font-head font-black text-2xl tracking-wider force-eng">FREE</h3><p class="text-xs font-semibold opacity-60 mt-1" data-i18n="cat-free-desc">Free Sample Assets</p></div></div><div class="opacity-60 text-xl font-bold">→</div></div>
       </div>
     </section>
+
     <section class="max-w-7xl mx-auto px-4 sm:px-6 py-12 border-t border-white/10 mt-12 reveal-on-scroll">
-      
       <div id="reviews-marquee-container" class="w-full mb-12 py-4 glass rounded-2xl hidden hide-scrollbar" dir="ltr" style="touch-action: pan-y;">
         <div id="reviews-marquee-track" class="flex gap-6 items-center px-4 w-max" dir="ltr"></div>
       </div>
@@ -523,6 +605,9 @@
     </footer>
   </main>
 
+  <!-- ========================================================
+       صفحة باقات الويب الكاملة والمنسقة مع الصور والتحويل للتليجرام
+       ======================================================== -->
   <section id="web-view" class="view view-hidden relative z-10 min-h-screen">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
       <div class="flex items-center justify-between mb-10">
@@ -531,6 +616,8 @@
       </div>
       
       <div class="grid lg:grid-cols-3 gap-6 items-stretch">
+        
+        <!-- 1. باقة STARTER -->
         <div class="vx-price-card card-theme-starter">
           <div>
             <img src="Page 1.png" alt="Starter Tier" class="tier-img-box" />
@@ -543,16 +630,20 @@
             <ul class="card__list">
               <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-s-f1">1 High-Converting Landing Page</span></li>
               <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-s-f2">Up to 4 Custom Sections</span></li>
+              <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-s-f3">Fully Responsive & Mobile-Optimized</span></li>
+              <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-s-f4">Smooth Basic Animations</span></li>
+              <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-s-f5">1 Revision Included</span></li>
             </ul>
           </div>
-          <div class="mt-2 text-center flex flex-col items-center">
-            <div class="delivery_text mb-2" data-i18n="plan-s-del">Delivery: 7 Days</div>
+          <div class="mt-2 text-center">
+            <div class="delivery_text" data-i18n="plan-s-del">Delivery: 7 Days</div>
             <button type="button" onclick="window.openTelegramOrder('STARTER', 150)" class="glass-btn-center">
-              <span data-i18n="buy-now">Buy Now</span>
+              <span data-i18n="select-plan">Buy Now</span>
             </button>
           </div>
         </div>
 
+        <!-- 2. باقة PREMIUM -->
         <div class="vx-price-card card-theme-premium">
           <div>
             <img src="Page 2.png" alt="Premium Tier" class="tier-img-box" />
@@ -564,16 +655,21 @@
             <hr class="line" />
             <ul class="card__list">
               <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-p-f1">Up to 3 Custom Web Pages</span></li>
+              <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-p-f2">Up to 8 Designed Sections</span></li>
+              <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-p-f3">Advanced UI/UX & Interactions</span></li>
+              <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-p-f4">Social Media & Channel Integration</span></li>
+              <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-p-f5">3 Revisions Included</span></li>
             </ul>
           </div>
-          <div class="mt-2 text-center flex flex-col items-center">
-            <div class="delivery_text mb-2" data-i18n="plan-p-del">Delivery: 10–15 Days</div>
+          <div class="mt-2 text-center">
+            <div class="delivery_text" data-i18n="plan-p-del">Delivery: 7–12 Days</div>
             <button type="button" onclick="window.openTelegramOrder('PREMIUM', 300)" class="glass-btn-center">
-              <span data-i18n="buy-now">Buy Now</span>
+              <span data-i18n="select-plan">Buy Now</span>
             </button>
           </div>
         </div>
 
+        <!-- 3. باقة ELITE -->
         <div class="vx-price-card card-theme-elite">
           <div>
             <img src="Page 3.png" alt="Elite Tier" class="tier-img-box" />
@@ -585,12 +681,16 @@
             <hr class="line" />
             <ul class="card__list">
               <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-v-f1">Up to 6 Custom Pages</span></li>
+              <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-v-f2">Up to 15 Dynamic Sections</span></li>
+              <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-v-f3">Bespoke 3D & Advanced VFX Effects</span></li>
+              <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-v-f4">Custom Interactive Elements</span></li>
+              <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-v-f5">Priority Support & Consultation</span></li>
             </ul>
           </div>
-          <div class="mt-2 text-center flex flex-col items-center">
-            <div class="delivery_text mb-2" data-i18n="plan-v-del">Delivery: 21–30 Days</div>
+          <div class="mt-2 text-center">
+            <div class="delivery_text" data-i18n="plan-v-del">Delivery: 15–20 Days</div>
             <button type="button" onclick="window.openTelegramOrder('ELITE', 600)" class="glass-btn-center">
-              <span data-i18n="buy-now">Buy Now</span>
+              <span data-i18n="select-plan">Buy Now</span>
             </button>
           </div>
         </div>
@@ -677,9 +777,10 @@
 
   window.addEventListener('DOMContentLoaded', runVxLoader);
 
+  /* دالة طلب الباقات: تحوّل لحسابك الشخصي في التليجرام مع رسالة جاهزة */
   window.openTelegramOrder = function(planName, price) {
     const telegramUsername = 'wot_5'; 
-    const message = `Hey VORTX! I want to purchase ${planName} ($${price}).`;
+    const message = `Hey VORTX! I want to purchase the ${planName} package ($${price}).`;
     window.open(`https://t.me/${telegramUsername}?text=${encodeURIComponent(message)}`, '_blank');
   };
 
@@ -1097,7 +1198,11 @@
         "cat-view-sub": "CATEGORY STORE", "cat-view-desc": "Explore all premium editing assets and bundles in this collection.", "preview-desc": "Includes full 4K vertical preset assets, color grade curves, and instant Payhip download integration.",
         "stat-subscribers": "Satisfied Clients", "stat-views": "Total Visits", "stat-orders": "Quality Guarantee", "stat-rating": "Satisfaction Score", 
         "review-title": "Leave Your Review & Rating", "review-sub": "Share your experience with VORTX Studio", "rating-breakdown": "RATING DISTRIBUTION", 
-        "placeholder-name": "Your Name (Optional)...✦˚", "placeholder-comment": "Write your review here (Optional)...✦˚" 
+        "placeholder-name": "Your Name (Optional)...✦˚", "placeholder-comment": "Write your review here (Optional)...✦˚",
+        "select-plan": "Buy Now",
+        "plan-s-title": "STARTER", "plan-s-price": "$150", "plan-s-f1": "1 High-Converting Landing Page", "plan-s-f2": "Up to 4 Custom Sections", "plan-s-f3": "Fully Responsive & Mobile-Optimized", "plan-s-f4": "Smooth Basic Animations", "plan-s-f5": "1 Revision Included", "plan-s-del": "Delivery: 7 Days",
+        "plan-p-title": "PREMIUM", "plan-p-price": "$300", "plan-p-f1": "Up to 3 Custom Web Pages", "plan-p-f2": "Up to 8 Designed Sections", "plan-p-f3": "Advanced UI/UX & Interactions", "plan-p-f4": "Social Media & Channel Integration", "plan-p-f5": "3 Revisions Included", "plan-p-del": "Delivery: 7–12 Days",
+        "plan-v-title": "ELITE", "plan-v-price": "$600", "plan-v-f1": "Up to 6 Custom Pages", "plan-v-f2": "Up to 15 Dynamic Sections", "plan-v-f3": "Bespoke 3D & Advanced VFX Effects", "plan-v-f4": "Custom Interactive Elements", "plan-v-f5": "Priority Support & Consultation", "plan-v-del": "Delivery: 15–20 Days"
       },
       ar: { 
         "nav-bundles": "الحزم", "nav-packs": "حزم متميزة", "nav-categories": "الأقسام", 
@@ -1114,7 +1219,11 @@
         "cat-view-sub": "متجر الأقسام", "cat-view-desc": "استكشف جميع حزم وأصول التعديل الاحترافية في هذه المجموعة.", "preview-desc": "يشمل ملفات 4K عمودية، منحنيات الألوان، وتحميل مباشر عبر Payhip.",
         "stat-subscribers": "عملاء راضون", "stat-views": "إجمالي الزيارات", "stat-orders": "ضمان الجودة", "stat-rating": "معدل التقييم", 
         "review-title": "اترك تقييمك ورأيك", "review-sub": "شاركونا تجربتكم مع فورتكس ستوديو", "rating-breakdown": "توزيع التقييمات", 
-        "placeholder-name": "اسمك (اختياري)...✦˚", "placeholder-comment": "اكتب تعليقك هنا (اختياري)...✦˚" 
+        "placeholder-name": "اسمك (اختياري)...✦˚", "placeholder-comment": "اكتب تعليقك هنا (اختياري)...✦˚",
+        "select-plan": "شراء الآن",
+        "plan-s-title": "البداية", "plan-s-price": "150$", "plan-s-f1": "صفحة هبوط احترافية عالي التحويل", "plan-s-f2": "حتى 4 أقسام مخصصة", "plan-s-f3": "متوافق بالكامل مع الجوال والشاشات", "plan-s-f4": "تحريكات أساسية سلسة", "plan-s-f5": "تعديل واحد مشمول", "plan-s-del": "التسليم: 7 أيام",
+        "plan-p-title": "المميزة", "plan-p-price": "300$", "plan-p-f1": "حتى 3 صفحات ويب مخصصة", "plan-p-f2": "حتى 8 أقسام مصممة", "plan-p-f3": "واجهة وتفاعلات متقدمة", "plan-p-f4": "ربط شبكات التواصل والقنوات", "plan-p-f5": "3 تعديلات مشمولة", "plan-p-del": "التسليم: 7-12 يوم",
+        "plan-v-title": "النخبة", "plan-v-price": "600$", "plan-v-f1": "حتى 6 صفحات مخصصة", "plan-v-f2": "حتى 15 قسم تفاعلي", "plan-v-f3": "تصميم 3D ومؤثرات بصرية خاصة", "plan-v-f4": "عناصر تفاعلية مخصصة", "plan-v-f5": "أولوية الدعم والاستشارات", "plan-v-del": "التسليم: 15-20 يوم"
       }
     };
     
